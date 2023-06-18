@@ -46,27 +46,26 @@ function Client() {
     }
   };
 
-  function calculateValues(elementRef) {
-    const theWidth = elementRef.current?.offsetWidth;
-    const maxLength = elementRef.current?.children.length;
-    const maxValue = maxLength * theWidth;
-    return { theWidth, maxLength, maxValue };
-  }
-
-  const values = calculateValues(oneWidth);
-
   const handleButtons = (e, index) => {
+    const theWidth = oneWidth.current.offsetWidth;
+    const maxLength = oneWidth.current.children.length;
+    const maxValue = maxLength * theWidth;
     setGrabIndex(index);
     e.preventDefault();
     // setValueChange(oneWidth.current.offsetWidth);
     index === 1
-      ? setValueChange((prev) => prev - values.theWidth)
-      : setValueChange((prev) => prev + values.theWidth);
-    console.log(values.valueChange - values.theWidth);
-    console.log(-values.maxValue);
-    if (values.valueChange - values.theWidth === -values.maxValue) {
+      ? setValueChange((prev) => prev - theWidth)
+      : setValueChange((prev) => prev + theWidth);
+    console.log(valueChange - theWidth);
+    console.log(-maxValue);
+    if (valueChange - theWidth === -maxValue) {
       setAccess(true);
+      // setValueChange(maxValue);
     }
+
+    // if (valueChange === 0) {
+    //   setValueChange(0);
+    // }
 
     setGrabIndex(4);
   };
@@ -84,8 +83,8 @@ function Client() {
               style={{
                 transform: `translateX(${
                   grabIndex === 1
-                    ? values.valueChange + oneWidth.current?.offsetWidth
-                    : values.valueChange - oneWidth.current?.offsetWidth
+                    ? valueChange + oneWidth.current?.offsetWidth
+                    : valueChange - oneWidth.current?.offsetWidth
                 }px)`,
               }}
             >
@@ -138,15 +137,9 @@ function Client() {
                 return (
                   <button
                     className={
-                      values.valueChange - values.theWidth ===
-                        -values.maxValue && index === 1
-                        ? "doneButton pointer smaller notAllowed trans"
-                        : values.theWidth < 1 && index === 0
-                        ? "doneButton pointer smaller notAllowed trans"
-                        : "doneButton pointer smaller trans"
-                      // !access
-                      //   ? "doneButton pointer bigger trans"
-                      //   : "doneButton pointer smaller notAllowed trans"
+                      !access
+                        ? "doneButton pointer bigger trans"
+                        : "doneButton pointer smaller notAllowed trans"
                     }
                     onClick={(e) => {
                       handleButtons(e, index);
