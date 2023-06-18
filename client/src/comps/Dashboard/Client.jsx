@@ -48,7 +48,7 @@ function Client() {
 
   function calculateValues(elementRef) {
     const theWidth = elementRef.current?.offsetWidth;
-    const maxLength = elementRef.current?.children[0]?.children.length;
+    const maxLength = elementRef.current?.children.length;
     const maxValue = maxLength * theWidth;
     return { theWidth, maxLength, maxValue };
   }
@@ -56,21 +56,21 @@ function Client() {
   const values = calculateValues(oneWidth);
 
   const handleButtons = (e, index) => {
+    setGrabIndex(index);
     e.preventDefault();
-    const newValueChange =
-      index === 1
-        ? valueChange - values.theWidth
-        : valueChange + values.theWidth;
-
-    if (newValueChange <= 0 && newValueChange >= -values.maxValue) {
-      setValueChange(newValueChange);
-      setAccess(false);
-    } else {
+    // setValueChange(oneWidth.current.offsetWidth);
+    index === 1
+      ? setValueChange((prev) => prev - values.theWidth)
+      : setValueChange((prev) => prev + values.theWidth);
+    console.log(values.valueChange - values.theWidth);
+    console.log(-values.maxValue);
+    if (values.valueChange - values.theWidth === -values.maxValue) {
       setAccess(true);
     }
 
     setGrabIndex(4);
   };
+
   return (
     <div className="insideArea flex jcac s">
       <p className="p textGradient">Добавить новый клиентский билет</p>
@@ -84,8 +84,8 @@ function Client() {
               style={{
                 transform: `translateX(${
                   grabIndex === 1
-                    ? values.valueChange + values.theWidth
-                    : values.valueChange - values.theWidth
+                    ? values.valueChange + oneWidth.current?.offsetWidth
+                    : values.valueChange - oneWidth.current?.offsetWidth
                 }px)`,
               }}
             >
