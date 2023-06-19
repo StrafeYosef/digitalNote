@@ -2,17 +2,15 @@ import React, { useEffect, useState, useRef } from "react";
 import { BsFillPersonFill } from "react-icons/bs";
 import { AiOutlineLeft } from "react-icons/ai";
 import { AiOutlineRight } from "react-icons/ai";
-import { AiOutlineDoubleLeft } from "react-icons/ai";
-import { AiOutlineDoubleRight } from "react-icons/ai";
+import { RiCheckboxBlankCircleFill } from "react-icons/ri";
 
 function Client() {
   const [access, setAccess] = useState(false);
 
+  let oneWidth = useRef(null);
   const [valueChange, setValueChange] = useState(0);
 
-  let oneWidth = useRef(null);
-
-  const [grabIndex, setGrabIndex] = useState(0);
+  const [neededWidth, setNeededWidth] = useState(4);
 
   const [inputs, setInputs] = useState([
     {
@@ -27,12 +25,7 @@ function Client() {
     },
   ]);
 
-  const buttons = [
-    // <AiOutlineDoubleLeft />,
-    <AiOutlineLeft />,
-    <AiOutlineRight />,
-    // <AiOutlineDoubleRight />,
-  ];
+  const buttons = [<AiOutlineLeft />, <AiOutlineRight />];
 
   const handleInputs = (e, index, key) => {
     const { value } = e.target;
@@ -48,26 +41,21 @@ function Client() {
 
   const handleButtons = (e, index) => {
     const theWidth = oneWidth.current.offsetWidth;
-    const maxLength = oneWidth.current.children.length;
-    const maxValue = maxLength * theWidth;
-    setGrabIndex(index);
     e.preventDefault();
-    // setValueChange(oneWidth.current.offsetWidth);
-    index === 1
-      ? setValueChange((prev) => prev - theWidth)
-      : setValueChange((prev) => prev + theWidth);
-    console.log(valueChange - theWidth);
-    console.log(-maxValue);
-    if (valueChange - theWidth === -maxValue) {
-      setAccess(true);
-      // setValueChange(maxValue);
+    if (index === 1) {
+      setValueChange((prev) => prev + theWidth);
+      setNeededWidth((prev) => prev + 6);
+    } else {
+      setValueChange((prev) => prev - theWidth);
+      setNeededWidth((prev) => prev - 6);
     }
-
-    // if (valueChange === 0) {
-    //   setValueChange(0);
-    // }
-
-    setGrabIndex(4);
+    oneWidth.current.scrollTo({
+      left:
+        index === 1
+          ? valueChange + oneWidth.current?.offsetWidth
+          : valueChange - oneWidth.current?.offsetWidth,
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -78,20 +66,14 @@ function Client() {
           <p>Ticket number 0001 /1</p>
           <div className="combine">
             <form
+              ref={oneWidth}
               className="fullWidth flex clientForm trans"
               action="POST"
-              style={{
-                transform: `translateX(${
-                  grabIndex === 1
-                    ? valueChange + oneWidth.current?.offsetWidth
-                    : valueChange - oneWidth.current?.offsetWidth
-                }px)`,
-              }}
             >
               {inputs.map((input, inputIndex) => {
                 return (
                   <React.Fragment key={inputIndex}>
-                    <div className="carousel flex" ref={oneWidth}>
+                    <div className="carousel flex">
                       {Object.entries(input).map(([key, value], index) => {
                         return (
                           <div
@@ -113,7 +95,6 @@ function Client() {
                                   className="input-field text trans bShadow"
                                   type="text"
                                   // required
-                                  style={{ height: "25%" }}
                                 />
                                 <label className="input-label trans inputSpecial color">
                                   {value[1]}
@@ -137,9 +118,13 @@ function Client() {
                 return (
                   <button
                     className={
-                      !access
-                        ? "doneButton pointer bigger trans"
-                        : "doneButton pointer smaller notAllowed trans"
+                      (valueChange === 0 && index === 0) ||
+                      (valueChange ===
+                        (oneWidth.current?.children[0]?.children?.length - 1) *
+                          oneWidth.current?.offsetWidth &&
+                        index === 1)
+                        ? "doneButton pointer smaller notAllowed trans"
+                        : "doneButton pointer bigger trans"
                     }
                     onClick={(e) => {
                       handleButtons(e, index);
@@ -149,6 +134,15 @@ function Client() {
                   </button>
                 );
               })}
+            </div>
+            <div className="circles flex jcac">
+              {Object.keys(inputs[0]).map((key, index) => (
+                <p className="mCircle" key={key}>{<RiCheckboxBlankCircleFill />}</p>
+              ))}
+              <p
+                className="squareMove trans green"
+                style={{ width: `${neededWidth}vmin` }}
+              ></p>
             </div>
           </div>
         </div>

@@ -112,6 +112,7 @@ body,
 
 .input-field {
   width: 60%;
+  height: 50%;
   padding: 10px;
   font-size: 2.5vmin;
   text-align: center;
@@ -155,16 +156,14 @@ body,
 
 .input-field:focus + .input-label
 /* .input-field:valid + .input-label, */
-/* .oneArea:valid + .input-label  */
-{
+/* .oneArea:valid + .input-label  */ {
   left: 4%;
   font-size: 3vmin;
   text-shadow: 0 0 1vmin white;
 }
 
 .oneArea .input-field:focus + .input-label
-/* .oneArea .input-field:valid + .input-label  */
-{
+/* .oneArea .input-field:valid + .input-label  */ {
   left: 15% !important;
   text-shadow: 0 0 1vmin black;
   color: #d381ffe7;
@@ -205,7 +204,7 @@ body,
 }
 
 .doneButton:hover {
-  transform: scale(.95);
+  transform: scale(0.95);
 }
 
 .doneButton::before {
@@ -373,7 +372,6 @@ body,
   overflow: hidden;
   align-items: center;
   justify-content: center;
-  overflow-x: scroll;
 }
 
 .oneArea {
@@ -396,6 +394,17 @@ body,
 .shrink {
   background: linear-gradient(#0a111abf, #d9e4ff, #90abdd);
   font-size: 1.2vmin !important;
+}
+
+.green {
+  background: rgba(0, 128, 0, 0.486);
+}
+
+.squareMove {
+  position: absolute;
+  left: 0;
+  width: 4vmin;
+  height: 4vmin;
 }
 
 .gray {
@@ -545,11 +554,13 @@ body,
   font-size: 2.5vmin;
 }
 
-.bigger, .smaller {
+.bigger,
+.smaller {
   border-radius: 25px;
 }
 
-.bigger:hover, .smaller:hover {
+.bigger:hover,
+.smaller:hover {
   filter: drop-shadow(0 0 1vmin white);
 }
 
@@ -591,9 +602,23 @@ body,
   color: #d381ff7c;
 }
 
+.circles {
+  position: relative;
+  font-size: 3vmin;
+  gap: 3vmin;
+  width: 40vmin;
+  margin: auto;
+  box-shadow: 0 0 1vmin black;
+}
+
 .special {
   height: fit-content;
   background: linear-gradient(#823eaa52, #42006a52);
+}
+
+.mCircle {
+  opacity: 0;
+
 }
 
 .carousel {
