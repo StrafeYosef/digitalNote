@@ -5,6 +5,7 @@ import Calendar from "./Calendar";
 import Client from "./Client";
 import Private from "./Private";
 import Data from "./Data";
+import addDetails from "../AddDetails";
 
 function Content() {
   const { clicked } = useContext(MyContext);
@@ -17,7 +18,7 @@ function Content() {
 
   const giveIndex = (index) => {
     setPrivateIndex(index);
-    console.log
+    console.log;
   };
 
   const { clickedDay, clickedMonth, clickedYear } = selectedDate;

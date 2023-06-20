@@ -108,11 +108,75 @@ body,
   justify-content: center;
   align-items: center;
   flex-direction: row-reverse;
+  padding-top: 4vmin;
+}
+
+.container {
+  padding: 2vmin;
+  position: relative;
+  align-items: center;
+}
+
+.rail {
+  width: 15%;
+  height: 75%;
+  position: absolute;
+  padding: 3vmin;
+}
+
+.line {
+  width: 50%;
+  align-items: initial !important;
+}
+
+.line p {
+  height: 10%;
+}
+
+.bottom {
+  transform: rotate(180deg);
+}
+
+.firstColor {
+  background: linear-gradient(45deg, #8d44b1, #8d44b1, #8d44b1);
+}
+
+.secondColor {
+  background: linear-gradient(45deg, #292068, #7e69ff, #292068);
+}
+
+.coolSquare {
+  width: 70%;
+  animation: go 20s linear infinite reverse;
+  filter: blur(1.5vmin) opacity(0.3);
+  border-radius: 50%;
+  
+}
+
+@keyframes go {
+  0% {
+    height: calc(100% / 10);
+  }
+  0% {
+    height: calc(100% / 50);
+  }
+  0% {
+    height: 100%;
+  }
+}
+
+.rail:first-child {
+  left: 1%;
+}
+
+.rail:last-child {
+  right: 1%;
 }
 
 .input-field {
-  width: 60%;
-  height: 50%;
+  width: 50%;
+  /* height: 45%; */
+  height: 100%;
   padding: 10px;
   font-size: 2.5vmin;
   text-align: center;
@@ -154,19 +218,24 @@ body,
   font-weight: bolder;
 }
 
-.input-field:focus + .input-label
-/* .input-field:valid + .input-label, */
-/* .oneArea:valid + .input-label  */ {
+.input-field:focus + .input-label,
+ .input-field:valid + .input-label, 
+.oneArea:valid + .input-label  
+ {
   left: 4%;
   font-size: 3vmin;
   text-shadow: 0 0 1vmin white;
 }
 
-.oneArea .input-field:focus + .input-label
-/* .oneArea .input-field:valid + .input-label  */ {
+.oneArea .input-field:focus + .input-label,
+.oneArea .input-field:valid + .input-label  {
   left: 15% !important;
   text-shadow: 0 0 1vmin black;
   color: #d381ffe7;
+}
+
+.half {
+  height: 50%;
 }
 
 .notAllowed {
@@ -184,9 +253,9 @@ body,
 
 .doneButton {
   width: 40%;
+  height: 15%;
   font-size: 2vmin;
   color: white;
-  height: 15%;
   border: initial;
   background: transparent;
   box-shadow: inset 0 0 1vmin black;
@@ -266,12 +335,21 @@ body,
   width: 80%;
 }
 
+.ticketNum {
+  font-size: 1vmin;
+  padding: 2.5vmin;
+  opacity: 0.5;
+}
+
 .mainInformation {
+  justify-content: center;
+  position: relative;
   overflow: hidden;
 }
 
 .buttons {
-  height: 20%;
+  height: 30%;
+  margin: auto;
   justify-content: space-around;
 }
 
@@ -319,6 +397,14 @@ body,
   background: #2a206879;
 }
 
+.addMoreButton {
+  width: 45%;
+  border-radius: 15px;
+  border: 3px solid #5b4ac98a;
+  filter: drop-shadow(0 0 1vmin black);
+  box-shadow: inset 0 0 1vmin #292068 !important;
+}
+
 .TopNav {
   height: fit-content;
 }
@@ -336,7 +422,7 @@ body,
 
 .color {
   letter-spacing: 0.1vw;
-  color: #d281ff;
+  color: #d281ffb2;
 }
 
 .center {
@@ -366,8 +452,16 @@ body,
   height: 100%;
 }
 
+.dialog {
+  background: rgba(255, 255, 255, 0.527);
+  width: 50%;
+  height: 60%;
+  border: 3px solid white;
+  z-index: 1;
+}
+
 .clientForm {
-  height: 65%;
+  height: 55%;
   flex-direction: column;
   overflow: hidden;
   align-items: center;
@@ -398,12 +492,13 @@ body,
 
 .green {
   background: rgba(0, 128, 0, 0.486);
+  filter: blur(1vmin);
 }
 
 .squareMove {
   position: absolute;
-  left: 0;
-  width: 4vmin;
+  bottom: 0;
+  width: 16vmin;
   height: 4vmin;
 }
 
@@ -505,6 +600,13 @@ body,
   }
 }
 
+.desc {
+  font-size: 2.5vmin;
+  letter-spacing: 0.1vw;
+  color: rgba(255, 255, 255, 0.651);
+  text-shadow: 0 0 .5vmin black;
+}
+
 .moreInside {
   width: 30%;
   height: 90%;
@@ -512,7 +614,6 @@ body,
 
 .datesToday {
   line-height: 6vmin;
-
   border-radius: 36px;
   border-bottom-left-radius: initial;
   border-bottom-right-radius: initial;
@@ -545,7 +646,7 @@ body,
 
 .bigger {
   width: 25% !important;
-  height: 60% !important;
+  height: 45% !important;
 }
 
 .smaller {
@@ -609,6 +710,8 @@ body,
   width: 40vmin;
   margin: auto;
   box-shadow: 0 0 1vmin black;
+  overflow: hidden;
+  border-radius: 25px;
 }
 
 .special {
@@ -618,11 +721,14 @@ body,
 
 .mCircle {
   opacity: 0;
+}
 
+.buttons {
+  width: 80%;
 }
 
 .carousel {
-  height: 60%;
+  height: 100%;
 }
 
 /* PHONE */
