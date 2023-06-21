@@ -25,13 +25,15 @@ function LoginAdmin() {
 
   const addUser = async () => {
     try {
-      await axios.post(
+      const res = await axios.post(
         "https://digitalnote.onrender.com/users/postUsers",
         {
           name,
           password,
         }
       );
+
+      console.log(res.data)
     } catch (error) {
       console.log(error);
     }
