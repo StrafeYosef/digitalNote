@@ -16,6 +16,8 @@ export const MyContextProvider = ({ children }) => {
 
   const [chosenIndex, setChosenIndex] = useState(0);
 
+  const [addInputs, setAddInputs] = useState([]);
+
   const days = [
     "Воскресенье",
     "Понедельник",
@@ -77,6 +79,11 @@ export const MyContextProvider = ({ children }) => {
 
   const [shouldOpen, setShouldOpen] = useState(false);
 
+  const startDialog = (e) => {
+    e.preventDefault();
+    setShouldOpen(true);
+  };
+
   const contextValues = {
     clicked,
     setClicked,
@@ -90,9 +97,12 @@ export const MyContextProvider = ({ children }) => {
     setShouldOpen,
     handleInputs,
     access,
+    addInputs,
+    setAddInputs,
     setAccess,
     days,
     months,
+    startDialog
   };
 
   return (

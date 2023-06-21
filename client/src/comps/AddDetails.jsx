@@ -1,30 +1,39 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MyContext } from "./Context/Context";
 
 function AddDetails() {
-  const { inputs, handleInputs } = useContext(MyContext);
+  let [array, setArray] = useState([]);
+
+  const addNew = () => {
+    const copyArray = [...array];
+    copyArray.push("");
+    setArray(copyArray)
+  };
+
+  // const handleInputs = (e) => {
+
+  // }
 
   return (
-    <div className="combine flex jcac absolute">
-      {inputs.map((input, inputIndex) => (
-        <div className="dialog" key={inputIndex}>
-          {Object.entries(input).map(([key, value], index) => (
-            <div key={index}>
-              <input
-                value={value[0]}
-                onChange={(e) => handleInputs(e, inputIndex, key)}
-                className="input-field text trans bShadow half"
-                type="text"
-                required
-              />
+    <div className="dialog combine flex jcac absolute">
+      <input
+        onChange={(e) => handleInputs()}
+        className="input-field text trans bShadow half"
+        type="text"
+        required
+      />
+      <label className="input-label trans inputSpecial color">{}</label>
+      <button onClick={addNew}>Add new input</button>
+        {array.map((arr) => {
+          return (
+            <>
+              <input type="text" />
               <label className="input-label trans inputSpecial color">
-                {value[1]}
+                {arr}
               </label>
-            </div>
-          ))}
-          <button className="doneButton">close</button>
-        </div>
-      ))}
+            </>
+          );
+        })}
     </div>
   );
 }
