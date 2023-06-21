@@ -10,7 +10,6 @@ function LoginAdmin() {
     password: "",
   });
 
-  
   const { name, password } = inputs;
 
   useEffect(() => {
