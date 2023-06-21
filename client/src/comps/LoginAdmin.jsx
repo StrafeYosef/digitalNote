@@ -22,7 +22,7 @@ function LoginAdmin() {
   const addUser = async () => {
     try {
       await axios.post(
-        "https://server-todolist-xr2q.onrender.com/users/postUsers",
+        "https://digitalnote.onrender.com/users/postUsers",
         {
           name,
           password,

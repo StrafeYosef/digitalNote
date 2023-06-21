@@ -1,7 +1,7 @@
-const Details = require("../../models/detailsModel");
+const Users = require("../../models/userModel");
 require("dotenv").config();
 
-const postDetails = async (req, res) => {
+const postUsers = async (req, res) => {
   const { name, password } = req.body;
 
   try {
@@ -12,12 +12,12 @@ const postDetails = async (req, res) => {
     const token = jwt.sign(itemsToken, secretToken, {
       expiresIn: "1d",
     });
-    const details = await Details.create({ name, password, token });
-    details.save();
-    res.status(200).json({ details });
+    const newUser = await Users.create({ name, password, token });
+    newUser.save();
+    res.status(200).json({ newUser });
   } catch (error) {
     console.log(error);
   }
 };
 
-module.exports = postDetails;
+module.exports = postUsers;
