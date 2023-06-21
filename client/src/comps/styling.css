@@ -150,7 +150,6 @@ body,
   animation: go 20s linear infinite reverse;
   filter: blur(1.5vmin) opacity(0.3);
   border-radius: 50%;
-  
 }
 
 @keyframes go {
@@ -219,23 +218,22 @@ body,
 }
 
 .input-field:focus + .input-label,
- .input-field:valid + .input-label, 
-.oneArea:valid + .input-label  
- {
+.input-field:valid + .input-label,
+.oneArea:valid + .input-label {
   left: 4%;
   font-size: 3vmin;
   text-shadow: 0 0 1vmin white;
 }
 
 .oneArea .input-field:focus + .input-label,
-.oneArea .input-field:valid + .input-label  {
+.oneArea .input-field:valid + .input-label {
   left: 15% !important;
   text-shadow: 0 0 1vmin black;
   color: #d381ffe7;
 }
 
 .half {
-  height: 50%;
+  height: 20%;
 }
 
 .notAllowed {
@@ -454,7 +452,7 @@ body,
 
 .dialog {
   background: rgba(255, 255, 255, 0.527);
-  width: 50%;
+  width: 65%;
   height: 60%;
   border: 3px solid white;
   z-index: 1;
@@ -604,7 +602,7 @@ body,
   font-size: 2.5vmin;
   letter-spacing: 0.1vw;
   color: rgba(255, 255, 255, 0.651);
-  text-shadow: 0 0 .5vmin black;
+  text-shadow: 0 0 0.5vmin black;
 }
 
 .moreInside {
@@ -734,9 +732,9 @@ body,
 /* PHONE */
 
 @media screen and (max-width: 900px) {
-  form {
+  /* form {
     width: 80% !important;
-  }
+  } */
   .input-label,
   .input-field {
     font-size: 3.5vmin;

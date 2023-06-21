@@ -15,11 +15,9 @@ function Client() {
   const { inputs, setInputs } = useContext(MyContext);
   const { handleInputs } = useContext(MyContext);
   const { shouldOpen, setShouldOpen } = useContext(MyContext);
+  const { addInput, setAddInputs } = useContext(MyContext);
 
-  const startDialog = (e) => {
-    e.preventDefault();
-    setShouldOpen(true);
-  };
+  const {startDialog} = useContext(MyContext);
 
   const buttons = [<AiOutlineLeft />, <AiOutlineRight />];
 
@@ -51,7 +49,6 @@ function Client() {
           <p className="desc absolute ticketNum">Номер билета 0001 /1</p>
           <div className="combine flex container">
             <div className="rail flex">
-              {/* CLEAN THIS CODE */}
               {array.map((arr, index) => {
                 return (
                   <>

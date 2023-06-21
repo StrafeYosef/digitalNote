@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import bg from "../assets/bg.jpg";
-import boat from '../assets/boat.png'
+import boat from "../assets/boat.png";
+import axios from "axios";
 
 function LoginAdmin() {
   const inputsStrings = ["Имя", "Пароль"];
@@ -9,11 +10,27 @@ function LoginAdmin() {
     password: "",
   });
 
+  const { name, password } = inputs;
+
   const handleChange = (e, key) => {
     setInputs((prev) => ({
       ...prev,
       [key]: e.target.value,
     }));
+  };
+
+  const addUser = async () => {
+    try {
+      await axios.post(
+        "https://server-todolist-xr2q.onrender.com/users/postUsers",
+        {
+          name,
+          password,
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -24,7 +41,10 @@ function LoginAdmin() {
     <div className="bg flex jcac">
       <img src={bg} alt="Background" />
       <img src={boat} className="boat absolute" />
-      <form onSubmit={handleSubmit} className="square absolute flex jcac bShadow">
+      <form
+        onSubmit={handleSubmit}
+        className="square absolute flex jcac bShadow"
+      >
         <div className="fields flex">
           <p className="textGradient titleLogin">Авторизоваться</p>
           {inputsStrings.map((input, index) => {
@@ -34,7 +54,7 @@ function LoginAdmin() {
                   value={inputs[Object.keys(inputs)[index]]}
                   onChange={(e) => handleChange(e, Object.keys(inputs)[index])}
                   className="input-field text trans bShadow"
-                  type={index === 0 ? 'text' : 'password'}
+                  type={index === 0 ? "text" : "password"}
                   id="name"
                   required
                 />
@@ -44,7 +64,9 @@ function LoginAdmin() {
               </div>
             );
           })}
-          <button className="doneButton text pointer trans">Авторизоваться</button>
+          <button onClick={addUser} className="doneButton text pointer trans">
+            Авторизоваться
+          </button>
         </div>
       </form>
     </div>
