@@ -28,8 +28,7 @@ function LoginAdmin() {
           password,
         }
       );
-``
-      console.log(res.data)
+      console.log(res.token)
     } catch (error) {
       console.log(error);
     }
