@@ -1,6 +1,6 @@
 const Users = require("../../models/userModel");
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 require("dotenv").config();
 
 const postUsers = async (req, res) => {
@@ -9,12 +9,12 @@ const postUsers = async (req, res) => {
   try {
     if (!name || !password)
       res.status(400).json({ err: "Please fill the inputs" });
-      
-      const protectedPassword = await bcrypt.hash(password, 10);
 
-      const itemsToken = { name, password: protectedPassword};
-      const secretToken = process.env.SECRET;
-      
+    const protectedPassword = await bcrypt.hash(password, 10);
+
+    const itemsToken = { name, password: protectedPassword };
+    const secretToken = process.env.SECRET;
+
     const token = jwt.sign(itemsToken, secretToken, {
       expiresIn: "1d",
     });
