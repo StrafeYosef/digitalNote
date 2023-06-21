@@ -11,19 +11,26 @@ const postUsers = async (req, res) => {
       res.status(400).json({ err: "Please fill the inputs" });
     }
     
+    const nameExists = await Users.findOne({ name });
+
+    if (!nameExists) return res.status(400).json({ err: "Not allowed here." });
+
     const protectedPassword = await bcrypt.hash(password, 10);
-    
+
     const { SECRET } = process.env;
-    
+
     const token = jwt.sign({ name, password: protectedPassword }, SECRET, {
       expiresIn: "1d",
     });
-    
-    const newUser = await Users.create({ name, password: protectedPassword, token });
-    await newUser.save();
-    
-    res.status(200).json({ newUser, token });
-    
+
+    // const newUser = await Users.create({
+    //   name,
+    //   password: protectedPassword,
+    //   token,
+    // });
+    // await newUser.save();
+
+    res.status(200).json({ nameExists, token });
   } catch (error) {
     console.log(error);
   }

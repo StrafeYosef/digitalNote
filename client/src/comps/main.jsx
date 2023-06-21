@@ -14,7 +14,8 @@ ReactDOM.createRoot(document.getElementById("digitalNote")).render(
   <Router>
     <Routes>
       <Route path="/login" element={<LoginAdmin />} />
-      <Route path="/dashboard/main" element={<Dashboard />} />
+      <Route path="/dashboard/home" element={<Dashboard />} />
+      <Route path="/dashboard/overview" element={<Dashboard />} />
       <Route path="/dashboard/client" element={<Dashboard />} />
       <Route path="/dashboard/private" element={<Dashboard />} />
     </Routes>

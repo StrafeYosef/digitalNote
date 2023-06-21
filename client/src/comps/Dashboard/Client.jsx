@@ -116,7 +116,7 @@ function Client() {
                                         type="text"
                                         required
                                       />
-                                      <label className="input-label trans inputSpecial color">
+                                      <label className="input-label trans color">
                                         {value[1]}
                                       </label>
                                     </>

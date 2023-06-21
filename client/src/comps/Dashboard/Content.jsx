@@ -5,6 +5,7 @@ import Calendar from "./Calendar";
 import Client from "./Client";
 import Private from "./Private";
 import Data from "./Data";
+import Home from "./Home";
 import addDetails from "../AddDetails";
 
 function Content() {
@@ -26,7 +27,7 @@ function Content() {
     <>
       <div className={clicked ? "Content" : "Content full"}>
         <TopNav />
-        {chosenIndex === 0 ? (
+        {chosenIndex === 1 ? (
           <div className="insideArea flex jcac">
             <div className="moreInside bg bShadow">
               <div className="bg special">
@@ -60,11 +61,12 @@ function Content() {
             </div>
             <Calendar />
           </div>
-        ) : chosenIndex === 1 ? (
+        ) : chosenIndex === 2 ? (
           <Client />
-        ) : (
+        ) : chosenIndex === 3 ? (
           <Private />
-        )}
+        ) : 
+        <Home/>}
       </div>
     </>
   );

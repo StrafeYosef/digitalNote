@@ -1,10 +1,11 @@
 import { GoNote } from "react-icons/go";
-import { BsFillPersonFill } from "react-icons/bs";
-import { AiFillHome } from "react-icons/ai";
-import { AiOutlineRight } from "react-icons/ai";
+import { BsFillPersonFill, BsEyeFill } from "react-icons/bs";
+import { AiFillHome, AiOutlineRight } from "react-icons/ai";
 import React, { useContext } from "react";
 import { MyContext } from "../Context/Context";
 import { useNavigate } from "react-router-dom";
+
+
 
 function SideNavContainer() {
   const navigate = useNavigate();
@@ -20,8 +21,9 @@ function SideNavContainer() {
   const titlesIcons = [
     {
       first: ["Общие", AiFillHome],
-      second: ["Клиент", GoNote],
-      third: ["Личный", BsFillPersonFill],
+      second: ["Обзор", BsEyeFill],
+      third: ["Клиент", GoNote],
+      fourth: ["Личный", BsFillPersonFill],
     },
   ];
 
@@ -52,7 +54,7 @@ function SideNavContainer() {
                     }
                     onClick={() => {
                       giveIndex(index);
-                      navigate(index === 0 ? '/dashboard/main' : index === 1 ? '/dashboard/client' : '/dashboard/private')
+                      navigate(index === 1 ? '/dashboard/overview' : index === 2 ? '/dashboard/client' : index === 3 ? '/dashboard/private' : '/dashboard/home')
                     }}
                   >
                     {clicked ? (

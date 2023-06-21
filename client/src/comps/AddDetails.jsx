@@ -2,38 +2,47 @@ import React, { useContext, useEffect, useState } from "react";
 import { MyContext } from "./Context/Context";
 
 function AddDetails() {
-  let [array, setArray] = useState([]);
+  const three = ["Quantity", "Type", "Price"];
+  let [array, setArray] = useState([
+    <div className="combine flex">
+      {three.map((th) => {
+        return (
+          <div className="combine flex jcac specialOne">
+            <input
+              type="text"
+              className="input-field text trans bShadow another"
+              required
+            />
+            {/* <label className="input-label trans inputSpecial color">{th}</label> */}
+          </div>
+        );
+      })}
+    </div>,
+  ]);
 
   const addNew = () => {
     const copyArray = [...array];
-    copyArray.push("");
-    setArray(copyArray)
+    copyArray.push(array);
+    setArray(copyArray);
+    array = [];
   };
 
-  // const handleInputs = (e) => {
-
-  // }
+  useEffect(() => {
+    console.log(array);
+  }, [array]);
 
   return (
     <div className="dialog combine flex jcac absolute">
-      <input
-        onChange={(e) => handleInputs()}
-        className="input-field text trans bShadow half"
-        type="text"
-        required
-      />
-      <label className="input-label trans inputSpecial color">{}</label>
-      <button onClick={addNew}>Add new input</button>
-        {array.map((arr) => {
-          return (
-            <>
-              <input type="text" />
-              <label className="input-label trans inputSpecial color">
-                {arr}
-              </label>
-            </>
-          );
+      <div className="combine flex jcac titles color">
+        {three.map((th) => {
+          return <p>{th}</p>;
         })}
+      </div>
+
+      <div className="combine flex jcac list">{array}</div>
+      <div className="buttonContainer flex jcac">
+        <button className="doneButton trans" onClick={addNew}>Add new input</button>
+      </div>
     </div>
   );
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import bg from "../assets/bg.jpg";
 import boat from "../assets/boat.png";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 function LoginAdmin() {
   const navigate = useNavigate();
@@ -21,29 +21,20 @@ function LoginAdmin() {
     }));
   };
 
-  useEffect(() => {
-
-    const checkAccess = () => {
-      // const res = 
-    }
-    checkAccess();
-  
-  })
-
   const addUser = async () => {
     try {
       const res = await axios.post(
-        "https://digitalnote.onrender.com/users/postUsers",
+        "http://localhost:5174/users/postUsers",
+        // "https://digitalnote.onrender.com/users/postUsers",
         {
           name,
           password,
         }
       );
-
-      if (res.status !== 200) navigate('/login');
+      if (res.status !== 200) navigate("/login");
       const { newUser, token } = res.data;
-      localStorage.setItem('token', `Bearer ${token}`);
-      navigate('/dashboard/main')
+      localStorage.setItem("token", `Bearer ${token}`);
+      navigate("/dashboard/home");
     } catch (error) {
       console.log(error);
     }
