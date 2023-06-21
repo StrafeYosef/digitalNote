@@ -10,7 +10,12 @@ function LoginAdmin() {
     password: "",
   });
 
+  
   const { name, password } = inputs;
+
+  useEffect(() => {
+    console.log(inputs)
+  }, [name, password])
 
   const handleChange = (e, key) => {
     setInputs((prev) => ({
