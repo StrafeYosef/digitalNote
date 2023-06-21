@@ -7,19 +7,25 @@ const postUsers = async (req, res) => {
   const { name, password } = req.body;
 
   try {
-    if (!name || !password)
+    if (!name || !password) {
       res.status(400).json({ err: "Please fill the inputs" });
+    }
 
     const protectedPassword = await bcrypt.hash(password, 10);
 
-    const itemsToken = { name, password: protectedPassword };
-    const secretToken = process.env.SECRET;
+    const { SECRET } = process.env;
 
-    const token = jwt.sign(itemsToken, secretToken, {
+    const token = jwt.sign({ name, password: protectedPassword }, SECRET, {
       expiresIn: "1d",
     });
-    const newUser = await Users.create({ itemsToken, token });
+
+    const newUser = await Users.create({
+      name,
+      password: protectedPassword,
+      token,
+    });
     await newUser.save();
+
     res.status(200).json({ newUser });
   } catch (error) {
     console.log(error);
