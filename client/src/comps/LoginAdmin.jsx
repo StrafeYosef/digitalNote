@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import bg from "../assets/bg.jpg";
 import boat from "../assets/boat.png";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 function LoginAdmin() {
+  const navigate = useNavigate();
   const inputsStrings = ["Имя", "Пароль"];
   const [inputs, setInputs] = useState({
     name: "",
@@ -19,6 +21,15 @@ function LoginAdmin() {
     }));
   };
 
+  useEffect(() => {
+
+    const checkAccess = () => {
+      // const res = 
+    }
+    checkAccess();
+  
+  })
+
   const addUser = async () => {
     try {
       const res = await axios.post(
@@ -28,7 +39,11 @@ function LoginAdmin() {
           password,
         }
       );
-      console.log(res.token)
+
+      if (res.status !== 200) navigate('/login');
+      const { newUser, token } = res.data;
+      localStorage.setItem('token', `Bearer ${token}`);
+      navigate('/dashboard/main')
     } catch (error) {
       console.log(error);
     }
