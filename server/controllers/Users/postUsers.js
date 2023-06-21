@@ -14,7 +14,7 @@ const postUsers = async (req, res) => {
     const token = jwt.sign(itemsToken, secretToken, {
       expiresIn: "1d",
     });
-    const protectedPassword = bcrypt.hash(password, 10);
+    const protectedPassword = await bcrypt.hash(password, 10);
     const newUser = await Users.create({ name, password: protectedPassword, token });
     await newUser.save();
     res.status(200).json({ newUser });
