@@ -13,7 +13,7 @@ const postUsers = async (req, res) => {
       expiresIn: "1d",
     });
     const newUser = await Users.create({ name, password, token });
-    newUser.save();
+    await newUser.save();
     res.status(200).json({ newUser });
   } catch (error) {
     console.log(error);
