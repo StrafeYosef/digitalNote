@@ -1,12 +1,14 @@
 import { useEffect, useState, useContext } from "react";
 import { MyContext } from "../Context/Context";
-import axios from 'axios';
+import axios from "axios";
 
 function TopNav() {
   const [date, setDate] = useState(new Date());
   const { days } = useContext(MyContext);
   const { months } = useContext(MyContext);
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
+
+  const [status, setStatus] = useState("online");
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -17,21 +19,48 @@ function TopNav() {
   }, []);
 
   useEffect(() => {
-    const getName = async() => {
+    const getName = async () => {
+      const checkStatus = async () => {
+        try {
+          const res = await axios.get("http://localhost:5174/users/getUsers");
+          const { name } = res.data[0];
+          setName(name);
+          setStatus("online");
+        } catch (error) {
+          setStatus("offline");
+        }
+      };
+      checkStatus();
 
-      const res = await axios.get('http://localhost:5174/users/getUsers');
+      const intervalId = setInterval(checkStatus, 1000);
 
-      const {name} = res.data[0]
-      setName(name)
-    }
-    getName()
+      return () => {
+        clearInterval(intervalId);
+      };
+    };
+    getName();
+  }, []);
 
-  }, [])
+  useEffect(() => {
+    console.log(status);
+  }, [status]);
 
   return (
     <div className="TopNav bShadow">
       <ul className="ulTop flex">
-        <li className="color">Добро пожаловать, {name}</li>
+        <li
+          className="color flex"
+          style={{ alignItems: "center", gap: "1vmin" }}
+        >
+          Добро пожаловать, {name}
+          <span
+            className={
+              status === "online"
+                ? "circleStatus trans online"
+                : "circleStatus trans offline"
+            }
+          ></span>
+        </li>
         <div className="center flex">
           <p>{days[date.getDay()]},</p>
           <p>{months[date.getMonth()]}</p>

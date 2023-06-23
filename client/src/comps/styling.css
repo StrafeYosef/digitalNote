@@ -233,7 +233,35 @@ body,
 }
 
 .half {
-  height: 55%;
+  height: 55% !important;
+}
+
+.circleStatus {
+  width: 1.7vmin;
+  height: 50%;
+  display: inline-block;
+  border-radius: 50%;
+  animation: opacity 2.5s linear infinite;
+  opacity: 1;
+}
+
+@keyframes opacity {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.online {
+  background-color: green;
+}
+.offline {
+  background-color: red;
 }
 
 .another {
@@ -372,12 +400,13 @@ body,
   background-color: #0a043528;
 }
 
-.Content, .buttonContainer {
+.Content,
+.buttonContainer {
   width: 100%;
 }
 
 .buttonContainer {
-  height: 20%;
+  height: 25%;
   padding: 2vmin;
 }
 
@@ -470,14 +499,20 @@ body,
 }
 
 .dialog {
-  background: linear-gradient(145deg, rgb(19, 15, 48), rgb(43, 37, 91), rgb(48, 41, 97));
+  background: linear-gradient(
+    145deg,
+    rgb(19, 15, 48),
+    rgb(43, 37, 91),
+    rgb(48, 41, 97)
+  );
   width: 65%;
-  height: 60%;
+  height: 80%;
   z-index: 1;
   flex-direction: column;
   box-shadow: inset 0 0 1vmin gray;
   border-radius: 15px;
   justify-content: flex-start;
+  overflow: hidden;
 }
 
 .titles {
@@ -525,12 +560,34 @@ body,
   font-size: 1.2vmin !important;
 }
 
+.contai {
+  height: 100vh;
+  position: relative;
+  flex-direction: column-reverse;
+  /* overflow-y: scroll; */
+}
+
+.area {
+  margin: 2vmin;
+  height: 12vh;
+  justify-content: space-between;
+}
+
 .list {
+  flex-direction: column;
+  position: relative;
+  height: 50vh;
+  overflow-y: scroll;
+  justify-content: flex-start;
+}
+
+.scrollable-list {
+  display: flex;
+  flex-direction: column;
+  max-height: 60vh;
   align-items: flex-start;
-margin: 2vmin;
-padding: 3vmin;
-height: 100%;
-flex-direction: column;
+  gap: 4vmin;
+  overflow-y: scroll;
 }
 
 .green {
@@ -746,12 +803,11 @@ flex-direction: column;
   color: #d381ff7c;
   position: inherit;
   transform: initial;
-
 }
 
 .specialOne {
   flex-direction: row-reverse;
-  height: calc(100% /3);
+  height: 10vh;
 }
 
 .circles {
