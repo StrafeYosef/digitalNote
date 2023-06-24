@@ -42,7 +42,7 @@ function Client() {
 
   return (
     <div className="insideArea flex jcac s">
-      {shouldOpen && <AddDetails />}
+      <AddDetails />
       <p className="p textGradient">Добавить новый клиентский билет</p>
       <div className="clientTicket bg bShadow">
         <div className="mainInformation flex fullWidth">
@@ -197,16 +197,3 @@ function Client() {
 }
 
 export default Client;
-
-{
-  /* <p>טניה אבן-חן ינושוק</p>
-          <p>קוסמטיקה רפואית - הסרת שיער בלייזר</p>
-          <div className="combine">
-          <p>הרימון 34 באר-גנים 7928900</p>
-          <p>טל' 054-745-9178</p>
-          <div className="combine">
-            <p>אי מייל: tec1@012.net.il</p>
-            <p>עוסק פטור מס' 317956951</p>
-          </div>
-          </div> */
-}

@@ -9,6 +9,7 @@ import Home from "./Home";
 import addDetails from "../AddDetails";
 
 function Content() {
+
   const { clicked } = useContext(MyContext);
   const { selectedDate } = useContext(MyContext);
   const { chosenIndex } = useContext(MyContext);

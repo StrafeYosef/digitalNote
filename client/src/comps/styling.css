@@ -34,6 +34,32 @@ body,
   height: 100%;
 }
 
+.scrollable-list {
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #6a2c8c #2c2277;
+}
+
+.scrollable-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable-list::-webkit-scrollbar-thumb {
+  background-color: #6a2c8c;
+}
+
+.scrollable-list::-webkit-scrollbar-track {
+  background-color: #6a2c8c;
+}
+
+@supports (-ms-overflow-style: none) {
+  .scrollable-list {
+    -ms-overflow-style: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #6a2c8c #2c2277;
+  }
+}
+
 #digitalNote {
   background: linear-gradient(-85deg, #110757e5, #110757e5, #110757e5);
 }
@@ -237,7 +263,7 @@ body,
 }
 
 .circleStatus {
-  width: 1.7vmin;
+  width: 1vmin;
   height: 50%;
   display: inline-block;
   border-radius: 50%;
@@ -250,7 +276,7 @@ body,
     opacity: 1;
   }
   50% {
-    opacity: .4;
+    opacity: 0.4;
   }
   100% {
     opacity: 1;
@@ -274,16 +300,16 @@ body,
   pointer-events: none;
 }
 
-.input-field:focus {
-  width: 45%;
-}
+/* .input-field:focus {
+  width: 15vw;
+} */
 
 .input-field:focus-within {
   outline: 3px solid #c987eb;
 }
 
 .doneButton {
-  width: 40%;
+  width: 55%;
   height: 15%;
   font-size: 2vmin;
   color: white;
@@ -291,15 +317,17 @@ body,
   background: transparent;
   box-shadow: inset 0 0 1vmin black;
   filter: drop-shadow(0 0 1vmin black);
-  color: #d588ff;
+  color: #b54eec;
   text-transform: uppercase;
   overflow: hidden;
+  letter-spacing: 0.1vw;
+  font-weight: bold;
 }
 
 .doneButton:hover,
 .sideNav ul li:hover {
   font-size: 2.5vmin;
-  width: 65%;
+  width: 15vw;
   filter: drop-shadow(0 0 1vmin #3e0c57);
 }
 
@@ -411,10 +439,16 @@ body,
 }
 
 .buttonContainer button {
-  width: 80%;
+  width: 25%;
   height: 70%;
   border-radius: 25px;
+  margin: auto;
 }
+
+.buttonContainer button:nth-child(3) {
+  box-shadow: inset 0 0 1.5vmin rgb(168, 14, 14) !important;
+}
+
 .buttonContainer button:hover {
   margin: auto;
 }
@@ -515,18 +549,29 @@ body,
   overflow: hidden;
 }
 
+.dadInputs {
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  gap: 6vmin;
+  width: 94%;
+  padding: 2vmin 0;
+}
+
 .titles {
   height: initial;
-  justify-content: space-around;
   font-size: 3vmin;
   padding: 2vmin;
+  padding-bottom: 2vmin;
+  padding-bottom: 2vmin;
   margin: 2vmin;
-  padding-bottom: initial;
-  margin-bottom: initial;
+  display: flex;
+  box-shadow: 0 0 1vmin black;
+  justify-content: start;
 }
 
 .titles p {
-  width: 33%;
+  width: 23.5%;
   text-align: center;
 }
 
@@ -549,6 +594,22 @@ body,
   flex-direction: column;
   border-radius: 15px;
   box-shadow: 0 0 2vmin black;
+  position: relative;
+}
+
+.calendar::before {
+  content: "";
+  background-image: url("/src/assets/butterfly.gif");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  /* filter: drop-shadow(0 0 0.5vmin #cb03ca); */
+  width: 5vw;
+  height: 15vh;
+  right: -5%;
+  top: -13%;
+  opacity: 0.5;
+  transform: skew(15deg, 7deg);
+  position: absolute;
 }
 
 .dates h2 {
@@ -561,7 +622,7 @@ body,
 }
 
 .contai {
-  height: 100vh;
+  height: 63vh;
   position: relative;
   flex-direction: column-reverse;
   /* overflow-y: scroll; */
@@ -577,17 +638,35 @@ body,
   flex-direction: column;
   position: relative;
   height: 50vh;
-  overflow-y: scroll;
+  overflow-y: auto;
+  margin-bottom: 3vmin;
   justify-content: flex-start;
 }
 
+.back {
+  transform: scale(1);
+}
+
+.close {
+  transform: scale(0);
+}
+
+.noItems {
+  height: 100%;
+  padding: 2vmin;
+  line-height: 6vmin;
+}
+
+.noItems p {
+  font-size: 3vmin;
+  text-align: center;
+}
+
 .scrollable-list {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  max-height: 60vh;
-  align-items: flex-start;
-  gap: 4vmin;
-  overflow-y: scroll;
+  gap: 10vmin;
 }
 
 .green {
@@ -728,6 +807,9 @@ body,
 }
 
 .insideArea {
+  /* background-image: url('../assets/bgg.gif');
+  background-repeat: no-repeat;
+  background-size: 100% 100%; */
   justify-content: space-around;
   background: #0000002b;
   padding: 2vmin;
@@ -806,7 +888,8 @@ body,
 }
 
 .specialOne {
-  flex-direction: row-reverse;
+  width: 80%;
+  justify-content: space-evenly;
   height: 10vh;
 }
 

@@ -9,7 +9,6 @@ function Calendar() {
 
   const { clickedYear, clickedMonth, clickedDay } = selectedDate;
 
-
   const [currentDate, setCurrentDate] = useState({
     currentDay: clickedYear,
     currentMonth: clickedMonth,
