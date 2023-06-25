@@ -1,9 +1,8 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { MyContext } from "./Context/Context";
+import { MyContext } from "../Context/Context";
 import { v4 as uuidv4 } from "uuid";
 import { ImFileEmpty } from "react-icons/im";
 import { FaShekelSign } from "react-icons/fa";
-
 
 function AddDetails() {
   const { shouldOpen, setShouldOpen } = useContext(MyContext);
@@ -67,7 +66,9 @@ function AddDetails() {
         <button className="doneButton trans pointer" onClick={addObjects}>
           Добавить новый
         </button>
-        <p className="color flex jcac" style={{fontSize: '3.5vmin'}}>{total} <FaShekelSign/></p>
+        <p className="color flex jcac" style={{ fontSize: "3.5vmin" }}>
+          {total} <FaShekelSign />
+        </p>
         <button
           onClick={() => setShouldOpen(false)}
           className="doneButton trans pointer"

@@ -263,7 +263,7 @@ body,
 }
 
 .circleStatus {
-  width: 1vmin;
+  width: 0.8vw;
   height: 50%;
   display: inline-block;
   border-radius: 50%;
@@ -300,16 +300,47 @@ body,
   pointer-events: none;
 }
 
-/* .input-field:focus {
-  width: 15vw;
-} */
+.illustration {
+  width: 60%;
+  border: 3px solid gray;
+}
+
+.optionsArea {
+  border: 3px solid black;
+  width: 40%;
+}
+
+.illustration,
+.optionsArea {
+  height: 100%;
+}
+
+.gatherThem {
+}
+
+.moving svg {
+  animation: moving 7s ease-in-out infinite;
+  font-size: 40vmin;
+}
+
+@keyframes moving {
+  0% {
+    transform: rotate3d(8, 10, 12, 0);
+  }
+  50% {
+    transform: rotate3d(1, -5, 3, 45deg);
+  }
+  100% {
+    transform: rotate3d(8, 10, 12, 0);
+  }
+}
 
 .input-field:focus-within {
   outline: 3px solid #c987eb;
 }
 
 .doneButton {
-  width: 55%;
+  width: 15vw;
   height: 15%;
   font-size: 2vmin;
   color: white;
@@ -329,6 +360,10 @@ body,
   font-size: 2.5vmin;
   width: 15vw;
   filter: drop-shadow(0 0 1vmin #3e0c57);
+}
+
+.doneButton:hover {
+  width: 25vw;
 }
 
 .doneButton:hover {

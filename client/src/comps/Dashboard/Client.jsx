@@ -3,7 +3,9 @@ import { MyContext } from "../Context/Context";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { RiCheckboxBlankCircleFill } from "react-icons/ri";
 import { MdOutlineAddCircle } from "react-icons/md";
-import AddDetails from "../AddDetails";
+import { IoIosArrowDropdownCircle } from "react-icons/io";
+import AddDetails from "../Dialogs/AddDetails";
+import AddSelect from "../Dialogs/AddSelect";
 
 function Client() {
   let oneWidth = useRef(null);
@@ -17,7 +19,7 @@ function Client() {
   const { shouldOpen, setShouldOpen } = useContext(MyContext);
   const { addInput, setAddInputs } = useContext(MyContext);
 
-  const {startDialog} = useContext(MyContext);
+  const { startAll } = useContext(MyContext);
 
   const buttons = [<AiOutlineLeft />, <AiOutlineRight />];
 
@@ -43,6 +45,7 @@ function Client() {
   return (
     <div className="insideArea flex jcac s">
       <AddDetails />
+      <AddSelect />
       <p className="p textGradient">Добавить новый клиентский билет</p>
       <div className="clientTicket bg bShadow">
         <div className="mainInformation flex fullWidth">
@@ -94,17 +97,24 @@ function Client() {
                                 </p>
                                 <p className="desc">{value[3]}</p>
                                 <div className="combine flex jcac">
-                                  {index === 1 ? (
-                                    <button
-                                      onClick={startDialog}
-                                      className="doneButton trans pointer color addMoreButton"
-                                      style={{
-                                        height: "50%",
-                                        fontSize: "4vmin",
-                                      }}
-                                    >
-                                      <MdOutlineAddCircle />
-                                    </button>
+                                  {index === 1 || index === 2 ? (
+                                    <>
+                                      <button
+                                        onClick={(e) => startAll(e, index)}
+                                        className="doneButton trans pointer color addMoreButton"
+                                        style={{
+                                          height: "50%",
+                                          fontSize: "4vmin",
+                                        }}
+                                      >
+                                        {index === 1 ? (
+                                          <MdOutlineAddCircle />
+                                        ) : (
+                                          <IoIosArrowDropdownCircle />
+                                    
+                                        )}
+                                      </button>
+                                    </>
                                   ) : (
                                     <>
                                       <input

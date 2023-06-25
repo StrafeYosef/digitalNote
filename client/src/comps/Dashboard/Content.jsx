@@ -6,7 +6,7 @@ import Client from "./Client";
 import Private from "./Private";
 import Data from "./Data";
 import Home from "./Home";
-import addDetails from "../AddDetails";
+// import addDetails from "../Dialogs/AddDetails";
 
 function Content() {
 
@@ -20,7 +20,6 @@ function Content() {
 
   const giveIndex = (index) => {
     setPrivateIndex(index);
-    console.log;
   };
 
   const { clickedDay, clickedMonth, clickedYear } = selectedDate;

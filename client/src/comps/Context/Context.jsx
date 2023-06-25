@@ -1,6 +1,7 @@
 import React, { createContext, useState } from "react";
 
 import { BsFillPersonFill, BsFillFileTextFill } from "react-icons/bs";
+import { MdOutlinePayment } from "react-icons/md";
 
 export const MyContext = createContext();
 
@@ -57,11 +58,9 @@ export const MyContextProvider = ({ children }) => {
         "",
         "",
       ],
-      price: ["", ""],
-      priceAll: ["", ""],
-      wayPay: ["", ""],
-      check: ["", ""],
-      date: ["", ""],
+      method: ["", "Method", <MdOutlinePayment />, "Payment Method", "", ""],
+      // a: ["", "Method", <MdOutlinePayment />, "Payment Method", "", ""],
+      // b: ["", "Method", <MdOutlinePayment />, "Payment Method", "", ""],
     },
   ]);
 
@@ -78,10 +77,14 @@ export const MyContextProvider = ({ children }) => {
   };
 
   const [shouldOpen, setShouldOpen] = useState(false);
+  const [selectOpen, setSelectOpen] = useState(false);
 
-  const startDialog = (e) => {
+  const startAll = (e, index) => {
+    console.log(index);
     e.preventDefault();
-    setShouldOpen(true);
+    index === 1
+      ? setShouldOpen((prev) => !prev)
+      : setSelectOpen((prev) => !prev);
   };
 
   const contextValues = {
@@ -95,6 +98,8 @@ export const MyContextProvider = ({ children }) => {
     setInputs,
     shouldOpen,
     setShouldOpen,
+    selectOpen,
+    setSelectOpen,
     handleInputs,
     access,
     addInputs,
@@ -102,7 +107,7 @@ export const MyContextProvider = ({ children }) => {
     setAccess,
     days,
     months,
-    startDialog
+    startAll,
   };
 
   return (
