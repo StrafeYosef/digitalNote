@@ -215,7 +215,8 @@ body,
 .active,
 .choose h5:hover {
   transform: scale(0.95);
-  border: 3px solid #d199ec;
+  border-radius: 15px;
+  border: 3px solid #54266b;
   box-shadow: inset 0 0 1vmin white !important;
 }
 
@@ -263,7 +264,7 @@ body,
 }
 
 .circleStatus {
-  width: 0.8vw;
+  width: 0.6vw;
   height: 50%;
   display: inline-block;
   border-radius: 50%;
@@ -301,13 +302,19 @@ body,
 }
 
 .illustration {
+  justify-content: space-evenly;
+  position: relative;
   width: 60%;
-  border: 3px solid gray;
+  flex-direction: column;
+  border-right: 5px solid #5e237f66;
+  height: 80%;
 }
 
 .optionsArea {
-  border: 3px solid black;
   width: 40%;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
 }
 
 .illustration,
@@ -316,11 +323,22 @@ body,
 }
 
 .gatherThem {
+  animation: moving 7s ease-in-out infinite;
+  font-size: 35vmin;
+  filter: drop-shadow(0 0 1vmin black) opacity(0.5);
 }
 
-.moving svg {
-  animation: moving 7s ease-in-out infinite;
-  font-size: 40vmin;
+.stand {
+  position: absolute;
+  border-left: 30vmin solid transparent;
+  border-right: 30vmin solid transparent;
+  border-bottom: 45vmin solid #4334b1;
+  transform: rotate(180deg);
+  filter: blur(3vmin);
+  z-index: -1;
+  bottom: 0;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
 }
 
 @keyframes moving {
@@ -480,8 +498,10 @@ body,
   margin: auto;
 }
 
-.buttonContainer button:nth-child(3) {
+.buttonContainer button:nth-child(3),
+.optionsArea button {
   box-shadow: inset 0 0 1.5vmin rgb(168, 14, 14) !important;
+  border-radius: 15px;
 }
 
 .buttonContainer button:hover {
@@ -926,6 +946,49 @@ body,
   width: 80%;
   justify-content: space-evenly;
   height: 10vh;
+}
+
+.titleInfo {
+  font-size: 4.5vmin;
+  letter-spacing: 0.25vw;
+}
+
+.optionsArea ul {
+  width: 70%;
+  height: 65%;
+  text-align: center;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: auto;
+  border-radius: 15px;
+  box-shadow: 0 0 1vmin black;
+}
+
+.optionsArea ul li {
+  width: 100%;
+  letter-spacing: 0.1vw;
+  text-shadow: 0 0 1vmin black;
+  font-size: 2.5vmin;
+  user-select: none;
+  border-top: 3px dashed rgba(255, 255, 255, 0.219);
+}
+
+.optionsArea ul li:first-child {
+  text-shadow: initial !important;
+  border-top: initial;
+  font-size: 2.5vmin;
+  box-shadow: 0 0.3vmin 1vmin black;
+  z-index: 2;
+  pointer-events: none;
+  line-height: 3.5vmin;
+}
+.optionsArea ul li:nth-child(2) {
+  border-top: initial;
+}
+
+.optionsArea ul li:not(.title):hover {
+  background-color: #d381ff36;
 }
 
 .circles {
