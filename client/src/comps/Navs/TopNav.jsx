@@ -20,24 +20,16 @@ function TopNav() {
 
   useEffect(() => {
     const getName = async () => {
-      const checkStatus = async () => {
-        try {
-          const res = await axios.get("http://localhost:5174/users/getUsers");
-          const { name } = res.data[0];
-          setName(name);
-          setStatus("online");
-        } catch (error) {
-          setStatus("offline");
-        }
-      };
-      checkStatus();
-
-      const intervalId = setInterval(checkStatus, 1000);
-
-      return () => {
-        clearInterval(intervalId);
-      };
+      try {
+        const res = await axios.get("http://localhost:5174/users/getUsers");
+        const { name } = res.data[0];
+        setName(name);
+        setStatus("online");
+      } catch (error) {
+        setStatus("offline");
+      }
     };
+
     getName();
   }, []);
 

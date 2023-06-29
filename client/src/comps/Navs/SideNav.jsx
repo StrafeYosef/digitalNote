@@ -41,9 +41,9 @@ function SideNavContainer() {
     >
       <div className="sideNav trans">
         <ul className="flex jcac trans">
-          {titlesIcons.map((title) => {
+          {titlesIcons.map((title, index) => {
             return (
-              <>
+              <React.Fragment key ={index}>
                 {Object.entries(title).map(([key, value], index) => (
                   <li
                     key={key}
@@ -66,7 +66,7 @@ function SideNavContainer() {
                     )}
                   </li>
                 ))}
-              </>
+              </React.Fragment>
             );
           })}
         </ul>

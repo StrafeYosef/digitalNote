@@ -20,7 +20,7 @@ const postUsers = async (req, res) => {
     const { SECRET } = process.env;
 
     const token = jwt.sign({ name, password: protectedPassword }, SECRET, {
-      expiresIn: "1d",
+      expiresIn: "1h",
     });
 
     // const newUser = await Users.create({

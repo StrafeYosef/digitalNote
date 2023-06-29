@@ -9,7 +9,6 @@ import Home from "./Home";
 // import addDetails from "../Dialogs/AddDetails";
 
 function Content() {
-
   const { clicked } = useContext(MyContext);
   const { selectedDate } = useContext(MyContext);
   const { chosenIndex } = useContext(MyContext);
@@ -65,8 +64,9 @@ function Content() {
           <Client />
         ) : chosenIndex === 3 ? (
           <Private />
-        ) : 
-        <Home/>}
+        ) : (
+          <Home />
+        )}
       </div>
     </>
   );

@@ -29,7 +29,7 @@ export default function AddSelect() {
     },
   ]);
 
-  const [clickedIndex, setClickedIndex] = useState(0);
+  const {clickedIndex, setClickedIndex} = useContext(MyContext);
 
   const getSelected = (index) => {
     setClickedIndex(index);
@@ -43,9 +43,8 @@ export default function AddSelect() {
         selectOpen ? "back" : "close"
       }`}
     >
-      <div className="illustration flex jcac">
+      <div className="illustration flex jcac" style={{ height: "90%" }}>
         <p className="title gradientText titleInfo">
-          {" "}
           {infoObject[clickedIndex].text}
         </p>
         <div className="item flex jcac color gatherThem trans">

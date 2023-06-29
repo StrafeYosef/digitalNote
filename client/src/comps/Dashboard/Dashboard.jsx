@@ -13,16 +13,19 @@ function Dashboard() {
     const checkAccess = async () => {
       try {
         if (!token) navigate("/login");
+        const response = await axios.get(
+          "http://localhost:5174/users/getUsers",
+          {
+            headers: {
+              authorization: token,
+            },
+          }
+        );
+        console.log(response.headers);
+        if (response.status !== 200) {
+          navigate("/login");
+        }
       } catch (error) {
-        console.log(error);
-        navigate("/login");
-      }
-      const response = await axios.get("http://localhost:5174/users/getUsers", {
-        headers: {
-          Authorization: token,
-        },
-      });
-      if (response.status !== 200) {
         navigate("/login");
       }
     };

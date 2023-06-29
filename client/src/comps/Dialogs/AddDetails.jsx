@@ -9,12 +9,14 @@ function AddDetails() {
   const scrollRef = useRef(null);
   const three = ["Количество", "Тип", "Цена"];
   const [theIndex, setTheIndex] = useState(1);
-  const [inputs, setInputs] = useState([]);
+
   const [total, setTotal] = useState(0);
 
   const removeNeeded = (index) => {
-    setInputs((prevArray) => prevArray.filter((_, i) => i !== index));
+    setPriceInputs((prevArray) => prevArray.filter((_, i) => i !== index));
   };
+
+    const {priceInputs, setPriceInputs} = useContext(MyContext);
 
   useEffect(() => {
     console.log(total);
@@ -26,7 +28,7 @@ function AddDetails() {
     for (let i = theIndex; i < theIndex + 3; i++) {
       newObject[i] = "";
     }
-    setInputs((prevInputs) => [...prevInputs, newObject]);
+    setPriceInputs((prevInputs) => [...prevInputs, newObject]);
   };
 
   useEffect(() => {
@@ -39,7 +41,7 @@ function AddDetails() {
   useEffect(() => {
     const calculateTotal = () => {
       let sum = 0;
-      inputs.forEach((input) => {
+      priceInputs.forEach((input) => {
         Object.entries(input).map(([key, value]) => {
           if (key % 3 === 0) {
             const parsedValue = Number(value);
@@ -52,7 +54,7 @@ function AddDetails() {
       setTotal(sum);
     };
     calculateTotal();
-  }, [inputs]);
+  }, [priceInputs]);
 
   return (
     <div
@@ -85,13 +87,13 @@ function AddDetails() {
         <div className="combine flex jcac list">
           <div
             className={
-              Object.keys(inputs).length === 0
+              Object.keys(priceInputs).length === 0
                 ? "scrollable-list trans noItems flex jcac"
                 : "scrollable-list trans"
             }
             ref={scrollRef}
           >
-            {Object.keys(inputs).length === 0 ? (
+            {Object.keys(priceInputs).length === 0 ? (
               <div
                 className="combine flex jcac"
                 style={{ flexDirection: "column", gap: "5vmin" }}
@@ -105,7 +107,7 @@ function AddDetails() {
                 </p>
               </div>
             ) : (
-              inputs.map((input, index) => (
+              priceInputs.map((input, index) => (
                 <div key={index} id={index} className="flex jcac dadInputs">
                   {Object.entries(input).map(([key, value]) => (
                     <>
@@ -114,12 +116,12 @@ function AddDetails() {
                         key={key}
                         value={value}
                         onChange={({ target }) => {
-                          const newInputs = [...inputs];
+                          const newInputs = [...priceInputs];
                           newInputs[index] = {
                             ...input,
                             [key]: target.value,
                           };
-                          setInputs(newInputs);
+                          setPriceInputs(newInputs);
                         }}
                       />
                     </>

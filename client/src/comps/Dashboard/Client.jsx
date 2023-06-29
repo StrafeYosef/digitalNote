@@ -4,16 +4,20 @@ import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { RiCheckboxBlankCircleFill } from "react-icons/ri";
 import { MdOutlineAddCircle } from "react-icons/md";
 import { IoIosArrowDropdownCircle } from "react-icons/io";
+
 import AddDetails from "../Dialogs/AddDetails";
 import AddSelect from "../Dialogs/AddSelect";
+import Check from "../Dialogs/Check";
+import Results from "../Dialogs/Results";
 
 function Client() {
   let oneWidth = useRef(null);
   const [valueChange, setValueChange] = useState(0);
-  const [neededWidth, setNeededWidth] = useState(4);
+  const [neededWidth, setNeededWidth] = useState(10);
 
+  
   const array = ["", ""];
-
+  
   const { inputs, setInputs } = useContext(MyContext);
   const { handleInputs } = useContext(MyContext);
   const { shouldOpen, setShouldOpen } = useContext(MyContext);
@@ -28,10 +32,10 @@ function Client() {
     e.preventDefault();
     if (index === 1) {
       setValueChange((prev) => prev + theWidth);
-      setNeededWidth((prev) => prev + 6);
+      setNeededWidth((prev) => prev + 10);
     } else {
       setValueChange((prev) => prev - theWidth);
-      setNeededWidth((prev) => prev - 6);
+      setNeededWidth((prev) => prev - 10);
     }
     oneWidth.current.scrollTo({
       left:
@@ -46,6 +50,8 @@ function Client() {
     <div className="insideArea flex jcac s">
       <AddDetails />
       <AddSelect />
+      <Check />
+      <Results />
       <p className="p textGradient">Добавить новый клиентский билет</p>
       <div className="clientTicket bg bShadow">
         <div className="mainInformation flex fullWidth">
@@ -76,70 +82,66 @@ function Client() {
                 className="fullWidth flex clientForm trans"
                 action="POST"
               >
-                {inputs.map((input, inputIndex) => {
-                  return (
-                    <React.Fragment key={inputIndex}>
-                      <div className="carousel flex">
-                        {Object.entries(input).map(([key, value], index) => {
-                          return (
-                            <div
-                              className="input-container flex fullWidth oneArea"
-                              style={{ height: "100%", minWidth: "100%" }}
-                            >
-                              <React.Fragment key={index}>
-                                <p
-                                  style={{
-                                    fontSize: "12vmin",
-                                    color: "#9a58bb",
-                                  }}
-                                >
-                                  {value[2]}
-                                </p>
-                                <p className="desc">{value[3]}</p>
-                                <div className="combine flex jcac">
-                                  {index === 1 || index === 2 ? (
-                                    <>
-                                      <button
-                                        onClick={(e) => startAll(e, index)}
-                                        className="doneButton trans pointer color addMoreButton"
-                                        style={{
-                                          height: "50%",
-                                          fontSize: "4vmin",
-                                        }}
-                                      >
-                                        {index === 1 ? (
-                                          <MdOutlineAddCircle />
-                                        ) : (
-                                          <IoIosArrowDropdownCircle />
-                                    
-                                        )}
-                                      </button>
-                                    </>
-                                  ) : (
-                                    <>
-                                      <input
-                                        value={value[0]}
-                                        onChange={(e) =>
-                                          handleInputs(e, inputIndex, key)
-                                        }
-                                        className="input-field text trans bShadow half"
-                                        type="text"
-                                        required
-                                      />
-                                      <label className="input-label trans color">
-                                        {value[1]}
-                                      </label>
-                                    </>
-                                  )}
-                                </div>
-                              </React.Fragment>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </React.Fragment>
-                  );
-                })}
+                <div className="combine">
+                  {inputs.map((input, index) => {
+                    return (
+                      <React.Fragment key={index}>
+                        <div className="carousel flex">
+                          <div
+                            className="input-container flex fullWidth oneArea"
+                            style={{ height: "100%", minWidth: "100%" }}
+                            key={index}
+                          >
+                            <React.Fragment>
+                              <p
+                                style={{
+                                  fontSize: "12vmin",
+                                  color: "#9a58bb",
+                                }}
+                              >
+                                {inputs[index].icon}
+                              </p>
+                              <p className="desc">{inputs[index].desc}</p>
+                              <div className="combine flex jcac">
+                                {index === 1 || index === 2 || index === 3 ? (
+                                  <>
+                                    <button
+                                      onClick={(e) => startAll(e, index)}
+                                      className="doneButton trans pointer color addMoreButton"
+                                      style={{
+                                        height: "50%",
+                                        fontSize: "4vmin",
+                                      }}
+                                    >
+                                      {index === 1 ? (
+                                        <MdOutlineAddCircle />
+                                      ) : (
+                                        <IoIosArrowDropdownCircle />
+                                      )}
+                                    </button>
+                                  </>
+                                ) : (
+                                  <>
+                                    <input
+                                      value={inputs[index].value}
+                                      onChange={(e) => handleInputs(e, index)}
+                                      className="input-field text trans bShadow half"
+                                      type="text"
+                                      required
+                                    />
+                                    <label className="input-label trans color">
+                                      {inputs[index].label}
+                                    </label>
+                                  </>
+                                )}
+                              </div>
+                            </React.Fragment>
+                          </div>
+                        </div>
+                      </React.Fragment>
+                    );
+                  })}
+                </div>
               </form>
 
               <div className="buttons flex jcac hm">
@@ -165,7 +167,6 @@ function Client() {
                   );
                 })}
               </div>
-
               <div className="combine flex jcac" style={{ height: "10%" }}>
                 <div className="circles flex jcac">
                   {Object.keys(inputs[0]).map((key, index) => (

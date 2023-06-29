@@ -1,7 +1,7 @@
 import React, { createContext, useState } from "react";
 
 import { BsFillPersonFill, BsFillFileTextFill } from "react-icons/bs";
-import { MdOutlinePayment } from "react-icons/md";
+import { MdOutlinePayment, MdFactCheck } from "react-icons/md";
 
 export const MyContext = createContext();
 
@@ -16,6 +16,8 @@ export const MyContextProvider = ({ children }) => {
   });
 
   const [chosenIndex, setChosenIndex] = useState(0);
+
+  const [clickedIndex, setClickedIndex] = useState(0);
 
   const [addInputs, setAddInputs] = useState([]);
 
@@ -48,27 +50,40 @@ export const MyContextProvider = ({ children }) => {
 
   const [inputs, setInputs] = useState([
     {
-      // isAdmin: '', yosef remove the comment once the server is ready, so only admin can send a request
-      for: ["", "Для", <BsFillPersonFill />, "Получатель лечения"],
-      details: [
-        "",
-        "",
-        <BsFillFileTextFill style={{ padding: "1vmin" }} />,
-        "Детали заказа",
-        "",
-        "",
-      ],
-      method: ["", "Method", <MdOutlinePayment />, "Payment Method", "", ""],
-      // a: ["", "Method", <MdOutlinePayment />, "Payment Method", "", ""],
-      // b: ["", "Method", <MdOutlinePayment />, "Payment Method", "", ""],
+      value: "",
+      label: "Для",
+      icon: <BsFillPersonFill />,
+      desc: "Получатель лечения",
+    },
+    {
+      value: "",
+      label: "Expenses",
+      icon: <BsFillFileTextFill style={{ padding: "1vmin" }} />,
+      desc: "Детали заказа",
+    },
+    {
+      value: "",
+      label: "Method",
+      icon: <MdOutlinePayment />,
+      desc: "Payment Method",
+    },
+    {
+      value: "",
+      label: "Results",
+      icon: <MdFactCheck />,
+      desc: "Summary of your inputs",
     },
   ]);
 
-  const handleInputs = (e, index, key) => {
+  const [priceInputs, setPriceInputs] = useState([]);
+
+  const handleInputs = (e, index) => {
     const { value } = e.target;
-    const updatedInputs = [...inputs];
-    updatedInputs[index][key][0] = value;
-    setInputs(updatedInputs);
+    setInputs((prevInputs) => {
+      const updatedInputs = [...prevInputs];
+      updatedInputs[index] = { ...updatedInputs[index], value };
+      return updatedInputs;
+    });
     if (value !== "") {
       setAccess(false);
     } else {
@@ -78,13 +93,16 @@ export const MyContextProvider = ({ children }) => {
 
   const [shouldOpen, setShouldOpen] = useState(false);
   const [selectOpen, setSelectOpen] = useState(false);
+  const [resultsOpen, setResultsOpen] = useState(false);
 
   const startAll = (e, index) => {
     console.log(index);
     e.preventDefault();
     index === 1
       ? setShouldOpen((prev) => !prev)
-      : setSelectOpen((prev) => !prev);
+      : index === 2
+      ? setSelectOpen((prev) => !prev)
+      : setResultsOpen((prev) => !prev);
   };
 
   const contextValues = {
@@ -105,6 +123,12 @@ export const MyContextProvider = ({ children }) => {
     addInputs,
     setAddInputs,
     setAccess,
+    clickedIndex,
+    setClickedIndex,
+    resultsOpen,
+    setResultsOpen,
+    priceInputs,
+    setPriceInputs,
     days,
     months,
     startAll,
