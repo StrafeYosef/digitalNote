@@ -1,17 +1,39 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import TopNav from "../Navs/TopNav";
 import { MyContext } from "../Context/Context";
 import Calendar from "./Calendar";
 import Client from "./Client";
 import Private from "./Private";
-import Data from "./Data";
 import Home from "./Home";
+import axios from "axios";
 // import addDetails from "../Dialogs/AddDetails";
 
 function Content() {
   const { clicked } = useContext(MyContext);
   const { selectedDate } = useContext(MyContext);
   const { chosenIndex } = useContext(MyContext);
+
+  const [db, setDB] = useState([]);
+
+  useEffect(() => {
+    const getDB = async () => {
+      try {
+        await axios
+          .get("http://localhost:5174/missions/getMissions")
+          .then((res) => {
+            setDB((prev) => {
+              return [...prev], res.data;
+            });
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getDB();
+  }, [db]);
 
   const [privateIndex, setPrivateIndex] = useState(0);
 
@@ -56,7 +78,25 @@ function Content() {
                     : clickedYear}
                 </p>
               </div>
-              <Data />
+              <div className="half flex">
+                {db.length > 0 ? (
+                  db.map((oneData) => {
+                    return (
+                      <div className="dataArea combine flex jcac">
+                        <h2 className="flex jcac combine">{oneData.first}</h2>
+                        <p className="flex jcac combine">{oneData.third}</p>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <h2
+                    className="combine flex jcac color"
+                    style={{ margin: "auto" }}
+                  >
+                    Current date is empty.
+                  </h2>
+                )}
+              </div>
             </div>
             <Calendar />
           </div>

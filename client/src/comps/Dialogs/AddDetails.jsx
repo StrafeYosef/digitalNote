@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { createRef, useContext, useEffect, useRef, useState } from "react";
 import { MyContext } from "../Context/Context";
 import { v4 as uuidv4 } from "uuid";
 import { ImFileEmpty } from "react-icons/im";
@@ -6,7 +6,7 @@ import { FaShekelSign } from "react-icons/fa";
 
 function AddDetails() {
   const { shouldOpen, setShouldOpen } = useContext(MyContext);
-  const scrollRef = useRef(null);
+  const scrollRef = createRef(null);
   const three = ["Количество", "Тип", "Цена"];
   const [theIndex, setTheIndex] = useState(1);
 
@@ -16,11 +16,11 @@ function AddDetails() {
     setPriceInputs((prevArray) => prevArray.filter((_, i) => i !== index));
   };
 
-    const {priceInputs, setPriceInputs} = useContext(MyContext);
+  const { priceInputs, setPriceInputs } = useContext(MyContext);
 
-  useEffect(() => {
-    console.log(total);
-  }, [total]);
+  // useEffect(() => {
+  //   console.log(total);
+  // }, [total]);
 
   const addObjects = () => {
     const newObject = {};
@@ -138,9 +138,6 @@ function AddDetails() {
                 </div>
               ))
             )}
-            {/* {array.map((item) => (
-              <React.Fragment>{item.content}</React.Fragment>
-            ))} */}
           </div>
         </div>
       </div>

@@ -1,7 +1,15 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useRef, createRef } from "react";
 
-import { BsFillPersonFill, BsFillFileTextFill } from "react-icons/bs";
+import {
+  BsFillPersonFill,
+  BsFillFileTextFill,
+  BsCreditCardFill,
+  BsCashStack,
+} from "react-icons/bs";
 import { MdOutlinePayment, MdFactCheck } from "react-icons/md";
+import { GiPaperPlane } from "react-icons/gi";
+import { AiOutlineQuestion } from "react-icons/ai";
+import { FaMoneyCheck } from "react-icons/fa";
 
 export const MyContext = createContext();
 
@@ -20,6 +28,10 @@ export const MyContextProvider = ({ children }) => {
   const [clickedIndex, setClickedIndex] = useState(0);
 
   const [addInputs, setAddInputs] = useState([]);
+
+  const [close, setClose] = useState(true);
+
+  const [checkInputs, setCheckInputs] = useState(["", "", "", ""]);
 
   const days = [
     "Воскресенье",
@@ -46,6 +58,11 @@ export const MyContextProvider = ({ children }) => {
     "Декабрь",
   ];
 
+  let oneWidth = createRef(null);
+
+  const [first, setFirst] = useState("");
+  const [second, setSecond] = useState("");
+
   const [access, setAccess] = useState(false);
 
   const [inputs, setInputs] = useState([
@@ -65,13 +82,55 @@ export const MyContextProvider = ({ children }) => {
       value: "",
       label: "Method",
       icon: <MdOutlinePayment />,
-      desc: "Payment Method",
+      desc: "Способ оплаты",
     },
     {
       value: "",
       label: "Results",
       icon: <MdFactCheck />,
-      desc: "Summary of your inputs",
+      desc: "Краткое изложение информации",
+    },
+  ]);
+
+  const sendMission = async () => {
+    try {
+      await axios.post("http://localhost:5174/missions/postMission", {
+        first,
+        second,
+        check: checkInputs.map((check) => check),
+        third,
+        date,
+      });
+      inputs[0].value = "";
+      setResultsOpen(false);
+      setSecond(infoObject[0].text);
+      setClickedIndex(0);
+      setPriceInputs([]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const [infoObject, setInfoObject] = useState([
+    {
+      text: "Cпособ Oплаты",
+      icon: <AiOutlineQuestion />,
+    },
+    {
+      text: "бит",
+      icon: <GiPaperPlane />,
+    },
+    {
+      text: "Наличные",
+      icon: <BsCashStack />,
+    },
+    {
+      text: "Kредитная Kарта",
+      icon: <BsCreditCardFill />,
+    },
+    {
+      text: "Чек ",
+      icon: <FaMoneyCheck />,
     },
   ]);
 
@@ -96,7 +155,6 @@ export const MyContextProvider = ({ children }) => {
   const [resultsOpen, setResultsOpen] = useState(false);
 
   const startAll = (e, index) => {
-    console.log(index);
     e.preventDefault();
     index === 1
       ? setShouldOpen((prev) => !prev)
@@ -106,6 +164,7 @@ export const MyContextProvider = ({ children }) => {
   };
 
   const contextValues = {
+    sendMission,
     clicked,
     setClicked,
     selectedDate,
@@ -113,6 +172,8 @@ export const MyContextProvider = ({ children }) => {
     chosenIndex,
     setChosenIndex,
     inputs,
+    close,
+    setClose,
     setInputs,
     shouldOpen,
     setShouldOpen,
@@ -124,11 +185,19 @@ export const MyContextProvider = ({ children }) => {
     setAddInputs,
     setAccess,
     clickedIndex,
+    first,
+    second,
+    setSecond,
+    setFirst,
     setClickedIndex,
     resultsOpen,
     setResultsOpen,
     priceInputs,
     setPriceInputs,
+    infoObject,
+    checkInputs,
+    setCheckInputs,
+    setInfoObject,
     days,
     months,
     startAll,

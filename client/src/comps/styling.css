@@ -503,7 +503,8 @@ body,
 }
 
 .buttonContainer button:nth-child(3),
-.optionsArea button {
+.optionsArea button,
+.finalButtons button:last-child {
   box-shadow: inset 0 0 1.5vmin rgb(168, 14, 14) !important;
   border-radius: 15px;
 }
@@ -606,6 +607,10 @@ body,
   border-radius: 15px;
   justify-content: flex-start;
   overflow: hidden;
+}
+
+.dialogResult {
+  padding: 2vmin;
 }
 
 .dadInputs {
@@ -921,6 +926,7 @@ body,
   background-size: 200% 100%;
   animation: gradientMovement 5s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite;
   filter: drop-shadow(0 0 1vmin rgba(0, 0, 0, 0.637));
+  padding: 2vmin;
 }
 
 .bShadow {
@@ -993,6 +999,30 @@ body,
   background-color: #d381ff36;
 }
 
+.check {
+  padding: 2vmin;
+}
+
+.check p {
+  font-size: 1.5vmin !important;
+  line-height: 3vmin;
+  width: initial !important;
+  color: #7062cc;
+  text-align: center;
+  background: initial !important;
+}
+
+.dataArea p {
+  height: 15vh;
+}
+
+.dataArea:nth-child(odd) {
+  background: #3f368294 !important;
+}
+.dataArea:nth-child(even) {
+  background: rgb(44, 81, 94) !important;
+}
+
 .checkContainer {
   z-index: 1;
   width: 35%;
@@ -1025,6 +1055,10 @@ body,
   background: linear-gradient(#823eaa52, #42006a52);
 }
 
+.finalButtons {
+  justify-content: space-around;
+}
+
 .mCircle {
   opacity: 0;
 }
@@ -1039,6 +1073,73 @@ body,
   padding-top: 5vmin;
   display: inline-block;
   vertical-align: top;
+}
+
+.receiver,
+.paymentMethod {
+  background: linear-gradient(45deg, #4e3bdf7e, #604cf118) !important;
+  height: 80% !important;
+}
+
+.receiver,
+.paymentMethod,
+.details {
+  background: linear-gradient(45deg, #170a7885, #483ba7);
+  box-shadow: inset 0 0 1vmin rgba(119, 119, 119, 0.459);
+  filter: drop-shadow(0 0 1vmin #281133);
+  letter-spacing: 0.1vw;
+  border-radius: 15px;
+  margin: 2vmin;
+}
+.receiver p,
+.paymentMethod p,
+.details p {
+  font-size: 2.5vmin;
+  text-align: center;
+  filter: initial;
+  background: linear-gradient(40deg, #beb5ff, #a464c4, #b03fe7);
+  font-weight: bolder;
+  width: calc(100% / 3);
+}
+
+.details .dadInputs {
+  border-bottom: 3px dashed pink;
+}
+
+.details .dadInputs:last-child {
+  border: initial;
+}
+
+.results {
+  letter-spacing: 0.2vw;
+  text-transform: uppercase;
+}
+
+.defaultValue {
+  margin: auto;
+  width: 70% !important;
+  line-height: 10vmin;
+}
+
+.details .scrollable-list {
+  gap: initial;
+  margin: auto;
+}
+
+.some {
+  flex-direction: column;
+  justify-content: space-around;
+  height: 85%;
+}
+
+.paymentMethod p svg {
+  font-size: 10vmin;
+  color: #a464c4;
+}
+
+.details {
+  height: 50%;
+  flex-direction: column;
 }
 
 /* PHONE */

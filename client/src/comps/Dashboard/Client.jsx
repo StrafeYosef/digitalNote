@@ -15,14 +15,22 @@ function Client() {
   const [valueChange, setValueChange] = useState(0);
   const [neededWidth, setNeededWidth] = useState(10);
 
-  
   const array = ["", ""];
-  
-  const { inputs, setInputs } = useContext(MyContext);
-  const { handleInputs } = useContext(MyContext);
-  const { shouldOpen, setShouldOpen } = useContext(MyContext);
-  const { addInput, setAddInputs } = useContext(MyContext);
 
+  const { resultsOpen } = useContext(MyContext);
+
+  const { inputs } = useContext(MyContext);
+  const { handleInputs } = useContext(MyContext);
+
+  useEffect(() => {
+    oneWidth.current.scrollTo({
+      left: -1 * (window.innerWidth * window.innerHeight),
+      behavior: "smooth",
+    });
+    setValueChange(0)
+    setNeededWidth(10)
+  }, [resultsOpen])
+ 
   const { startAll } = useContext(MyContext);
 
   const buttons = [<AiOutlineLeft />, <AiOutlineRight />];

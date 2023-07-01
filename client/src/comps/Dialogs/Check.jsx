@@ -3,24 +3,15 @@ import { MyContext } from "../Context/Context";
 
 function Check() {
   const { clickedIndex, setClickedIndex } = useContext(MyContext);
-  const [checkInputs, setCheckInputs] = useState([
-    {
-      checkNum: "",
-      Bank: "",
-      ZP: "",
-      Total: "",
-    },
-  ]);
 
-  // useEffect(() => {
-  //   console.log(checkInputs);
-  // }, [checkInputs]);
+  const { checkInputs, setCheckInputs } = useContext(MyContext);
 
-  const handleInputs = (e, input) => {
-    setCheckInputs({
-      ...checkInputs,
-      [input]: e.target.value,
-    });
+  const { close, setClose } = useContext(MyContext);
+
+  const handleInputChange = (e, inputIndex) => {
+    const updatedInputs = [...checkInputs];
+    updatedInputs[inputIndex] = e.target.value;
+    setCheckInputs(updatedInputs);
   };
 
   const inputs = ["Check num", "Bank", "ZP", "total"];
@@ -28,26 +19,23 @@ function Check() {
   return (
     <div
       className={`combine absolute checkContainer flex jcac trans ${
-        clickedIndex === 4 ? "back" : "close"
+        close && clickedIndex === 4 ? "back" : "close"
       }`}
     >
-      {inputs.map((input) => {
-        return (
-          <div className="combine flex jcac">
-            <input
-              value={checkInputs[input]}
-              onChange={(e) => handleInputs(e, input)}
-              className="input-field text trans bShadow half"
-              type="text"
-              placeholder={input}
-              style={{ width: "75%" }}
-            />
-          </div>
-        );
-      })}
+      {checkInputs.map((input, index) => (
+        <input
+          key={index}
+          value={input}
+          onChange={(e) => handleInputChange(e, index)}
+          className="input-field text trans bShadow half"
+          type="text"
+          placeholder={inputs[index]}
+          style={{ width: "75%" }}
+        />
+      ))}
       <button
         className="doneButton trans pointer combine"
-        onClick={() => setClickedIndex(0)}
+        onClick={() => setClose(false)}
         style={{ height: "50%" }}
       >
         SAVE

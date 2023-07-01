@@ -1,35 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { MyContext } from "../Context/Context";
-import { BsCreditCardFill, BsCashStack } from "react-icons/bs";
-import { GiPaperPlane } from "react-icons/gi";
-import { AiOutlineQuestion } from "react-icons/ai";
-import { FaMoneyCheck } from "react-icons/fa";
 
 export default function AddSelect() {
-  const [infoObject, setInfoObject] = useState([
-    {
-      text: "Cпособ Oплаты",
-      icon: <AiOutlineQuestion />,
-    },
-    {
-      text: "бит",
-      icon: <GiPaperPlane />,
-    },
-    {
-      text: "Наличные",
-      icon: <BsCashStack />,
-    },
-    {
-      text: "Kредитная Kарта",
-      icon: <BsCreditCardFill />,
-    },
-    {
-      text: "Чек ",
-      icon: <FaMoneyCheck />,
-    },
-  ]);
+  const { clickedIndex, setClickedIndex } = useContext(MyContext);
 
-  const {clickedIndex, setClickedIndex} = useContext(MyContext);
+  const { infoObject, setInfoObject } = useContext(MyContext);
+
+  const { close, setClose } = useContext(MyContext);
 
   const getSelected = (index) => {
     setClickedIndex(index);
@@ -63,7 +40,11 @@ export default function AddSelect() {
           {infoObject.map((info, index) => (
             <li
               key={index}
-              onClick={() => getSelected(index)}
+              onClick={() =>
+                index === 4
+                  ? (getSelected(index), setClose(true))
+                  : getSelected(index)
+              }
               className={
                 index === 0
                   ? "flex jcac color title gradientText"

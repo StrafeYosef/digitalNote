@@ -7,7 +7,6 @@ const authenticateToken = (req, res, next) => {
 
     if (token && typeof token === "string") {
       const justToken = token.split(" ")[1];
-      console.log(justToken);
       if (!justToken)
         return res.status(400).json({ err: "Invalid format or token" });
       jwt.verify(justToken, process.env.SECRET, (err, decoded) => {
