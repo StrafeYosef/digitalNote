@@ -13,13 +13,11 @@ const authenticateToken = (req, res, next) => {
         if (err) return res.status(403).json({ err: "token expired" });
         req.user = decoded;
       });
-      return res.status(200).json({ msg: "success" });
     }
+    next();
   } catch (error) {
-    console.log(error);
+    next(error);
   }
-  // req.token = token;
-  next();
 };
 
 module.exports = authenticateToken;

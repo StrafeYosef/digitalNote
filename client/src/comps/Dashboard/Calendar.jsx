@@ -7,13 +7,17 @@ function Calendar() {
   const [maxDays, setMaxDays] = useState(0);
   const { selectedDate, setSelectedDate } = useContext(MyContext);
 
-  const { clickedYear, clickedMonth, clickedDay } = selectedDate;
+  // const { clickedYear, clickedMonth, clickedDay } = selectedDate;
 
   const [currentDate, setCurrentDate] = useState({
-    currentDay: clickedYear,
-    currentMonth: clickedMonth,
-    currentYear: clickedDay,
+    currentDay: date.getDate(),
+    currentMonth: date.getMonth(),
+    currentYear: date.getFullYear(),
   });
+
+  // useEffect(() => {
+
+  // }, [])
 
   const [theAmount, setTheAmount] = useState(0);
 
@@ -123,9 +127,13 @@ function Calendar() {
                   index - theAmount.length >= maxDays
                     ? "flex trans pointer gray"
                     : day === currentDate.currentDay &&
-                      month == currentDate.currentMonth &&
+                      month === currentDate.currentMonth &&
                       year === currentDate.currentYear
                     ? "flex trans pointer currentDay"
+                    : day === selectedDate.clickedDay &&
+                      month === selectedDate.clickedMonth &&
+                      year === selectedDate.clickedYear
+                    ? "flex trans pointer doneButton clickedDay"
                     : "flex trans pointer"
                 }
                 key={index}
