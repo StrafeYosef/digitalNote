@@ -502,8 +502,11 @@ body,
   margin: auto;
 }
 
+.allData {
+  flex-direction: column;
+}
+
 .buttonContainer button:nth-child(3),
-.optionsArea button,
 .finalButtons button:last-child {
   box-shadow: inset 0 0 1.5vmin rgb(168, 14, 14) !important;
   border-radius: 15px;
@@ -1012,15 +1015,53 @@ body,
   background: initial !important;
 }
 
-.dataArea p {
+.dataArea {
+  overflow: hidden;
+  justify-content: flex-start;
+  position: relative;
+}
+
+/* .dataArea p {
   height: 15vh;
+} */
+
+.dataArea:nth-child(odd),
+.dataArea:nth-child(even) {
+  text-shadow: 0 0 1vmin black;
 }
 
 .dataArea:nth-child(odd) {
+  color: #beb4ffa6;
   background: #3f368294 !important;
 }
 .dataArea:nth-child(even) {
-  background: rgb(44, 81, 94) !important;
+  background: rgba(38, 23, 111, 0.5) !important;
+  color: #6e45ff;
+}
+
+.dissapear {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.appear {
+  transform: translateX(0%);
+}
+
+.dataArea p {
+  font-size: 3.5vmin;
+  letter-spacing: 0.2vw;
+  right: 0;
+}
+
+.dataArea p,
+.dataArea h2 {
+  width: 50%;
+  text-align: center;
+}
+
+.dataArea h2 {
+  width: 100%;
 }
 
 .checkContainer {

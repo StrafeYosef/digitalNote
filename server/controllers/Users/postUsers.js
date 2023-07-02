@@ -7,9 +7,7 @@ const postUsers = async (req, res) => {
   const { name, password } = req.body;
 
   try {
-    if (!name || !password) {
-      res.status(400).json({ err: "Please fill the inputs" });
-    }
+    if (!name || !password) return res.status(400).json({ err: "Please fill the inputs" });
     
     const nameExists = await Users.findOne({ name });
 
@@ -30,7 +28,7 @@ const postUsers = async (req, res) => {
     // });
     // await newUser.save();
 
-    res.status(200).json({ nameExists, token });
+    return res.status(200).json({ nameExists, token });
   } catch (error) {
     console.log(error);
   }

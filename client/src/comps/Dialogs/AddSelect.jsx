@@ -34,7 +34,7 @@ export default function AddSelect() {
           onClick={() => setSelectOpen(false)}
           className="doneButton trans pointer"
         >
-          закрывать
+          Сохранить
         </button>
         <ul className="special">
           {infoObject.map((info, index) => (

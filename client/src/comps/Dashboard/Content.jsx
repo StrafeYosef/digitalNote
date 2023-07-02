@@ -13,6 +13,8 @@ function Content() {
   const { selectedDate } = useContext(MyContext);
   const { chosenIndex } = useContext(MyContext);
 
+  const [wasClicked, setWasClicked] = useState(0);
+
   const [db, setDB] = useState([]);
 
   useEffect(() => {
@@ -37,10 +39,18 @@ function Content() {
 
   const [privateIndex, setPrivateIndex] = useState(0);
 
+  const [tabIndex, setTabIndex] = useState(0);
+
   const titles = ["дневной", "месячный", "Годовой"];
 
   const giveIndex = (index) => {
     setPrivateIndex(index);
+  };
+
+  const showMore = (index) => {
+    setTabIndex(index);
+    setWasClicked((prev) => prev + 1);
+    wasClicked === 2 && setWasClicked(0);
   };
 
   const { clickedDay, clickedMonth, clickedYear } = selectedDate;
@@ -78,13 +88,50 @@ function Content() {
                     : clickedYear}
                 </p>
               </div>
-              <div className="half flex">
+              <div className="allData half flex">
                 {db.length > 0 ? (
-                  db.map((oneData) => {
+                  db.map((oneData, index) => {
                     return (
-                      <div className="dataArea combine flex jcac">
+                      <div
+                        className="dataArea combine flex jcac"
+                        onClick={() => {
+                          showMore(index);
+                        }}
+                      >
                         <h2 className="flex jcac combine">{oneData.first}</h2>
-                        <p className="flex jcac combine">{oneData.third}</p>
+                        <p
+                          className={`combine flex trans jcac absolute ${
+                            wasClicked === 0 ? "appear" : "dissapear"
+                          }`}
+                        >
+                          {oneData.third[0][2]}
+                        </p>
+                        <div className="combine flex jcac">
+                          {oneData.third.map((data, index) => {
+                            return (
+                              <>
+                                <h2
+                                  className={`flex jcac combine trans ${
+                                    wasClicked === 1
+                                      ? "appear "
+                                      : "dissapear absolute"
+                                  }`}
+                                >
+                                  {data[1]}
+                                </h2>
+                                <h2
+                                  className={`flex jcac combine trans ${
+                                    wasClicked === 2
+                                      ? "appear "
+                                      : "dissapear absolute"
+                                  }`}
+                                >
+                                  {data[0]}
+                                </h2>
+                              </>
+                            );
+                          })}
+                        </div>
                       </div>
                     );
                   })
