@@ -111,7 +111,7 @@ function Client() {
                               </p>
                               <p className="desc">{inputs[index].desc}</p>
                               <div className="combine flex jcac">
-                                {index === 1 || index === 2 || index === 3 ? (
+                                {index === 2 || index === 3 || index === 4 ? (
                                   <>
                                     <button
                                       onClick={(e) => startAll(e, index)}

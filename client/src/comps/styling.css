@@ -34,7 +34,8 @@ body,
   height: 100%;
 }
 
-.scrollable-list {
+.scrollable-list,
+.allData {
   overflow: auto;
   scrollbar-width: thin;
   scrollbar-color: #6a2c8c #2c2277;
@@ -502,8 +503,13 @@ body,
   margin: auto;
 }
 
+.allData {
+  overflow-y: auto;
+  height: 80% !important;
+  flex-direction: column;
+}
+
 .buttonContainer button:nth-child(3),
-.optionsArea button,
 .finalButtons button:last-child {
   box-shadow: inset 0 0 1.5vmin rgb(168, 14, 14) !important;
   border-radius: 15px;
@@ -1003,6 +1009,32 @@ body,
   padding: 2vmin;
 }
 
+.noFound {
+  gap: 5vmin;
+  text-align: center;
+  padding: 5vmin;
+  line-height: 6vmin;
+  flex-direction: column;
+}
+
+.noFound svg {
+  font-size: 7vmin;
+  transform: translate(2vmin, 0);
+  animation: spin 2.5s ease-in-out infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: translate(2vmin, 0);
+  }
+  50% {
+    transform: translate(2vmin, -1vmin);
+  }
+  100% {
+    transform: translateY(2vmin, 0);
+  }
+}
+
 .check p {
   font-size: 1.5vmin !important;
   line-height: 3vmin;
@@ -1012,15 +1044,87 @@ body,
   background: initial !important;
 }
 
+.dataArea {
+  min-height: 15vmin !important;
+  overflow: hidden;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.dataArea h2:not(:nth-child(1)),
+.dataArea h2,
 .dataArea p {
-  height: 15vh;
+  color: #9457b2 !important;
+}
+
+.dataArea:nth-child(odd),
+.dataArea:nth-child(even) {
+  text-shadow: 0 0 1vmin black;
 }
 
 .dataArea:nth-child(odd) {
+  color: #beb4ffa6;
   background: #3f368294 !important;
 }
 .dataArea:nth-child(even) {
-  background: rgb(44, 81, 94) !important;
+  background: rgba(38, 23, 111, 0.5) !important;
+  color: #6e45ff;
+}
+
+.dissapear {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.appear {
+  transform: translateX(0%);
+}
+
+.oneData {
+  flex-direction: column;
+}
+
+.dataArea p {
+  font-size: 3.5vmin;
+  letter-spacing: 0.2vw;
+  right: 0;
+}
+
+.clickedDay {
+  width: initial;
+  animation: comeGo 2.2s linear infinite !important;
+}
+
+.clickedDay:hover {
+  width: initial;
+}
+
+@keyframes comeGo {
+  0% {
+    color: white;
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.95);
+    color: #9941c2;
+    box-shadow: inset 0 0 2vmin #d373ff93;
+    filter: drop-shadow(initial);
+  }
+  100% {
+    transform: scale(1);
+    color: white;
+  }
+}
+
+.dataArea p,
+.dataArea h2 {
+  width: 50%;
+  text-align: center;
+}
+
+.dataArea h2 {
+  width: 100%;
+  /* padding: 2vmin; */
 }
 
 .checkContainer {
