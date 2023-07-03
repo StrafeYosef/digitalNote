@@ -1009,6 +1009,32 @@ body,
   padding: 2vmin;
 }
 
+.noFound {
+  gap: 5vmin;
+  text-align: center;
+  padding: 5vmin;
+  line-height: 6vmin;
+  flex-direction: column;
+}
+
+.noFound svg {
+  font-size: 7vmin;
+  transform: translate(2vmin, 0);
+  animation: spin 2.5s ease-in-out infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: translate(2vmin, 0);
+  }
+  50% {
+    transform: translate(2vmin, -1vmin);
+  }
+  100% {
+    transform: translateY(2vmin, 0);
+  }
+}
+
 .check p {
   font-size: 1.5vmin !important;
   line-height: 3vmin;
@@ -1023,6 +1049,12 @@ body,
   overflow: hidden;
   justify-content: flex-start;
   position: relative;
+}
+
+.dataArea h2:not(:nth-child(1)),
+.dataArea h2,
+.dataArea p {
+  color: #9457b2 !important;
 }
 
 .dataArea:nth-child(odd),

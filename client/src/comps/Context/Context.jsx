@@ -6,7 +6,12 @@ import {
   BsCreditCardFill,
   BsCashStack,
 } from "react-icons/bs";
-import { MdOutlinePayment, MdFactCheck } from "react-icons/md";
+import {
+  MdOutlinePayment,
+  MdFactCheck,
+  MdAlternateEmail,
+} from "react-icons/md";
+
 import { GiPaperPlane } from "react-icons/gi";
 import { AiOutlineQuestion } from "react-icons/ai";
 import { FaMoneyCheck } from "react-icons/fa";
@@ -62,6 +67,7 @@ export const MyContextProvider = ({ children }) => {
 
   const [first, setFirst] = useState("");
   const [second, setSecond] = useState("");
+  const [email, setEmail] = useState("");
 
   const [access, setAccess] = useState(false);
 
@@ -71,6 +77,12 @@ export const MyContextProvider = ({ children }) => {
       label: "Для",
       icon: <BsFillPersonFill />,
       desc: "Получатель лечения",
+    },
+    {
+      value: "",
+      label: "почта",
+      icon: <MdAlternateEmail />,
+      desc: "Электронная почта",
     },
     {
       value: "",
@@ -165,6 +177,8 @@ export const MyContextProvider = ({ children }) => {
 
   const contextValues = {
     sendMission,
+    email,
+    setEmail,
     clicked,
     setClicked,
     selectedDate,
