@@ -28,7 +28,7 @@ function Client() {
       behavior: "smooth",
     });
     setValueChange(0)
-    setNeededWidth(10)
+    setNeededWidth(8)
   }, [resultsOpen])
  
   const { startAll } = useContext(MyContext);

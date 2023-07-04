@@ -1,13 +1,16 @@
 const Users = require("../../models/userModel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+// const nodemailer = require("nodemailer");
+// const { google } = require("googleapis");
+// const { OAuth2Client } = require("google-auth-library");
 require("dotenv").config();
 
 const postUsers = async (req, res) => {
   const { name, password } = req.body;
 
   try {
-    if (!name || !password) return res.status(400).json({ err: "Please fill the inputs" });
+    if (!name || !password) return res.status(400).json({ err: "Please fill in the inputs" });
     
     const nameExists = await Users.findOne({ name });
 
@@ -20,13 +23,6 @@ const postUsers = async (req, res) => {
     const token = jwt.sign({ name, password: protectedPassword }, SECRET, {
       expiresIn: "1d",
     });
-
-    // const newUser = await Users.create({
-    //   name,
-    //   password: protectedPassword,
-    //   token,
-    // });
-    // await newUser.save();
 
     return res.status(200).json({ nameExists, token });
   } catch (error) {
