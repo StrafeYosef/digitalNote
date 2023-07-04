@@ -15,6 +15,7 @@ function Results() {
   const { checkInputs, setCheckInputs } = useContext(MyContext);
 
   const { first, setFirst } = useContext(MyContext);
+  const { email, setEmail } = useContext(MyContext);
   const { second, setSecond } = useContext(MyContext);
   const [third, setThird] = useState(null);
 
@@ -29,6 +30,7 @@ function Results() {
       }.${theDate.getUTCFullYear()}`
     );
     setFirst(inputs[0].value);
+    setEmail(inputs[1].value);
     setSecond(infoObject[clickedIndex].text);
     setThird(
       priceInputs.map((input) => {
@@ -43,12 +45,15 @@ function Results() {
     try {
       await axios.post("http://localhost:5174/missions/postMission", {
         first,
+        email,
         second,
         check: checkInputs.map((check) => check),
         third,
         date,
       });
-      inputs[0].value = "";
+      for (let i = 0; i <= 1; i++) {
+        inputs[i].value = ""
+      }
       setResultsOpen(false);
       setSecond(infoObject[0].text);
       setClickedIndex(0);
@@ -68,7 +73,10 @@ function Results() {
       <div className="combine flex jcac some">
         <div className="combine flex jcac" style={{ height: "initial" }}>
           <div className="receiver combine half flex jcac">
-            <p className="title gradientText">{first || "? ? ?"}</p>
+            <p className="title gradientText">{first || "No user provided"}</p>
+          </div>
+          <div className="email combine flex jcac">
+            <p className="title gradientText">{email || "No email provided"}</p>
           </div>
           <div className="paymentMethod combine half flex jcac">
             <p className="title gradientText">

@@ -115,65 +115,61 @@ function Content() {
                 </div>
               </div>
               <div className="allData half flex">
-                {db.length > 0 ? (
-                  db.map((oneData, index) => {
-                    const [dayDB, monthDB, yearDB] = oneData.date.split(".");
-                    return (privateIndex === 0 &&
-                      clickedDay === Number(dayDB)) ||
-                      (privateIndex === 1 &&
-                        clickedMonth === Number(monthDB - 1)) ||
-                      (privateIndex === 2 && clickedYear === Number(yearDB)) ? (
-                      <div className="dataArea combine flex jcac">
-                        <div
-                          className="dataArea combine flex jcac"
-                          onClick={() => {
-                            showMore(index);
-                          }}
-                        >
-                          <h1 className="flex jcac combine">{oneData.first}</h1>
-                          <p
-                            className={`combine flex trans jcac absolute ${
-                              wasClicked === 0 ? "appear" : "dissapear"
-                            }`}
+                {db.length > 0
+                  ? db.map((oneData, index) => {
+                      const [dayDB, monthDB, yearDB] = oneData.date.split(".");
+                      return (privateIndex === 0 &&
+                        clickedDay === Number(dayDB)) ||
+                        (privateIndex === 1 &&
+                          clickedMonth === Number(monthDB - 1)) ||
+                        (privateIndex === 2 &&
+                          clickedYear === Number(yearDB)) ? (
+                        <div className="dataArea combine flex jcac">
+                          <div
+                            className="dataArea combine flex jcac"
+                            onClick={() => {
+                              showMore(index);
+                            }}
                           >
-                            {oneData.third[0][2]}
-                          </p>
-                          <div className="combine flex jcac oneData">
-                            {oneData.third.map((data, index) => (
-                              <>
-                                <h2
-                                  className={`flex jcac combine trans ${
-                                    wasClicked === 1
-                                      ? "appear "
-                                      : "dissapear absolute"
-                                  }`}
-                                >
-                                  {data[1]}
-                                </h2>
-                                <h2
-                                  className={`flex jcac combine trans ${
-                                    wasClicked === 2
-                                      ? "appear "
-                                      : "dissapear absolute"
-                                  }`}
-                                >
-                                  {data[0]}
-                                </h2>
-                              </>
-                            ))}
+                            <h1 className="flex jcac combine">
+                              {oneData.first}
+                            </h1>
+                            <p
+                              className={`combine flex trans jcac absolute ${
+                                wasClicked === 0 ? "appear" : "dissapear"
+                              }`}
+                            >
+                              {oneData.third[0][2]}
+                            </p>
+                            <div className="combine flex jcac oneData">
+                              {oneData.third.map((data, index) => (
+                                <>
+                                  <h2
+                                    className={`flex jcac combine trans ${
+                                      wasClicked === 1
+                                        ? "appear "
+                                        : "dissapear absolute"
+                                    }`}
+                                  >
+                                    {data[1]}
+                                  </h2>
+                                  <h2
+                                    className={`flex jcac combine trans ${
+                                      wasClicked === 2
+                                        ? "appear "
+                                        : "dissapear absolute"
+                                    }`}
+                                  >
+                                    {data[0]}
+                                  </h2>
+                                </>
+                              ))}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ) : null;
-                  })
-                ) : (
-                  <h2
-                    className="combine flex jcac color"
-                    style={{ margin: "auto" }}
-                  >
-                    Current date is empty.
-                  </h2>
-                )}
+                      ) : null;
+                    })
+                  : null}
                 {!matchedDataFound && (
                   <div className="combine flex jcac noFound color">
                     <TbZoomQuestion />

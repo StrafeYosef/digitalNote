@@ -13,7 +13,7 @@ import Results from "../Dialogs/Results";
 function Client() {
   let oneWidth = useRef(null);
   const [valueChange, setValueChange] = useState(0);
-  const [neededWidth, setNeededWidth] = useState(10);
+  const [neededWidth, setNeededWidth] = useState(8);
 
   const array = ["", ""];
 
@@ -40,10 +40,10 @@ function Client() {
     e.preventDefault();
     if (index === 1) {
       setValueChange((prev) => prev + theWidth);
-      setNeededWidth((prev) => prev + 10);
+      setNeededWidth((prev) => prev + 8);
     } else {
       setValueChange((prev) => prev - theWidth);
-      setNeededWidth((prev) => prev - 10);
+      setNeededWidth((prev) => prev - 8);
     }
     oneWidth.current.scrollTo({
       left:

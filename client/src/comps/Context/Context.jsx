@@ -168,9 +168,9 @@ export const MyContextProvider = ({ children }) => {
 
   const startAll = (e, index) => {
     e.preventDefault();
-    index === 1
+    index === 2
       ? setShouldOpen((prev) => !prev)
-      : index === 2
+      : index === 3
       ? setSelectOpen((prev) => !prev)
       : setResultsOpen((prev) => !prev);
   };
