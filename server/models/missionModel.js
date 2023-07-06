@@ -13,8 +13,8 @@ const MissionsSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    check: {
-        type: String,
+    checkDetails: {
+        type: Array,
     },
     third: {
         type: Array,

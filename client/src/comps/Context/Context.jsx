@@ -64,6 +64,9 @@ export const MyContextProvider = ({ children }) => {
   ];
 
   let oneWidth = createRef(null);
+  // const [checkDetails, setCheckDetails] = useState(null);
+
+  // setCheckDetails(checkInputs);
 
   const [first, setFirst] = useState("");
   const [second, setSecond] = useState("");
@@ -104,24 +107,24 @@ export const MyContextProvider = ({ children }) => {
     },
   ]);
 
-  const sendMission = async () => {
-    try {
-      await axios.post("http://localhost:5174/missions/postMission", {
-        first,
-        second,
-        check: checkInputs.map((check) => check),
-        third,
-        date,
-      });
-      inputs[0].value = "";
-      setResultsOpen(false);
-      setSecond(infoObject[0].text);
-      setClickedIndex(0);
-      setPriceInputs([]);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const sendMission = async () => {
+  //   try {
+  //     await axios.post("http://localhost:5174/missions/postMission", {
+  //       first,
+  //       second,
+  //       check: checkDetails,
+  //       third,
+  //       date,
+  //     });
+  //     inputs[0].value = "";
+  //     setResultsOpen(false);
+  //     setSecond(infoObject[0].text);
+  //     setClickedIndex(0);
+  //     setPriceInputs([]);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const [infoObject, setInfoObject] = useState([
     {
@@ -176,7 +179,7 @@ export const MyContextProvider = ({ children }) => {
   };
 
   const contextValues = {
-    sendMission,
+    // sendMission,
     email,
     setEmail,
     clicked,

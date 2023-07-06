@@ -18,6 +18,7 @@ function Results() {
   const { email, setEmail } = useContext(MyContext);
   const { second, setSecond } = useContext(MyContext);
   const [third, setThird] = useState(null);
+  const [checkDetails, setCheckDetails] = useState(null);
 
   const [date, setDate] = useState("");
 
@@ -39,6 +40,8 @@ function Results() {
         });
       })
     );
+    setCheckDetails(checkInputs)
+    console.log(checkDetails)
   }, [inputs, priceInputs, infoObject, checkInputs, clickedIndex]);
 
   const sendMission = async () => {
@@ -47,12 +50,12 @@ function Results() {
         first,
         email,
         second,
-        check: checkInputs.map((check) => check),
+        checkDetails,
         third,
         date,
       });
       for (let i = 0; i <= 1; i++) {
-        inputs[i].value = ""
+        inputs[i].value = "";
       }
       setResultsOpen(false);
       setSecond(infoObject[0].text);
