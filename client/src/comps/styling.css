@@ -35,7 +35,11 @@ body,
 }
 
 .scrollable-list,
-.allData {
+.allData,
+.table,
+.Content,
+.full,
+.moreInside {
   overflow: auto;
   scrollbar-width: thin;
   scrollbar-color: #6a2c8c #2c2277;
@@ -386,7 +390,7 @@ body,
 }
 
 .doneButton:hover {
-  width: 40%;
+  width: 35vmin;
 }
 
 .doneButton:hover {
@@ -488,6 +492,11 @@ body,
 
 .Content,
 .buttonContainer {
+  overflow: hidden;
+  width: 100%;
+}
+
+.full {
   width: 100%;
 }
 
@@ -509,7 +518,7 @@ body,
   flex-direction: column;
 }
 
-.buttonContainer button:nth-child(3),
+/* .buttonContainer button:nth-child(3), */
 .finalButtons button:last-child {
   box-shadow: inset 0 0 1.5vmin rgb(168, 14, 14) !important;
   border-radius: 15px;
@@ -606,7 +615,7 @@ body,
     rgb(48, 41, 97)
   );
   width: 65%;
-  height: 80%;
+  height: 85%;
   z-index: 1;
   flex-direction: column;
   box-shadow: inset 0 0 1vmin gray;
@@ -632,12 +641,17 @@ body,
   height: initial;
   font-size: 3vmin;
   padding: 2vmin;
+  margin-bottom: 3vmin !important;
   padding-bottom: 2vmin;
-  padding-bottom: 2vmin;
-  margin: 2vmin;
+  /* margin: 3vmin; */
   display: flex;
-  box-shadow: 0 0 1vmin black;
+  box-shadow: inset 0 0 1vmin black;
   justify-content: start;
+}
+
+.theData:hover {
+  transform: scale(0.95);
+  filter: brightness(15);
 }
 
 .titles p {
@@ -660,12 +674,15 @@ body,
 }
 
 .calendar {
-  width: 55%;
-  height: 70%;
+  width: 100%;
+  height: 85%;
   flex-direction: column;
   border-radius: 15px;
   box-shadow: 0 0 2vmin black;
   position: relative;
+}
+.op p {
+  font-size: 2.5vmin;
 }
 
 .calendar::before {
@@ -740,6 +757,15 @@ body,
   gap: 10vmin;
 }
 
+.save {
+  box-shadow: inset 0 0 2vmin rgba(0, 128, 0, 0.486);
+  border-radius: 15px;
+}
+
+.save:hover {
+  width: 50% !important;
+}
+
 .green {
   background: rgba(0, 128, 0, 0.486);
   filter: blur(1vmin);
@@ -764,7 +790,7 @@ body,
 
 .topTitle {
   background-color: #1e1464ad;
-  height: 15%;
+  /* height: 15%; */
   grid-template-columns: repeat(3, 1fr);
 }
 
@@ -792,10 +818,11 @@ body,
 .title {
   text-align: center;
   font-weight: bold;
-  font-size: 2.5vmin;
+  font-size: 2vmin;
   background: linear-gradient(#e7efff, #d5a0f0);
   letter-spacing: 0.1vw;
   padding: 2vmin;
+  line-height: 4.5vmin;
   filter: drop-shadow(0 0 1vmin black);
 }
 
@@ -881,7 +908,7 @@ body,
   justify-content: space-around;
   background: #0000002b;
   padding: 2vmin;
-  height: 95%;
+  height: 94%;
 }
 
 .clientTicket {
@@ -919,6 +946,152 @@ body,
   width: 20%;
 }
 
+.table {
+  box-shadow: inset 0 0 1vmin #5f247f;
+  border-radius: 15px;
+  height: 80%;
+  width: 90%;
+  /* padding: 2vmin; */
+}
+
+.someFix {
+  height: initial !important;
+  box-shadow: initial !important;
+}
+
+.seaAnimalTwo {
+  width: 11vmin;
+  right: 0;
+  transform: rotate(-5deg);
+  bottom: 30%;
+  opacity: 0.7;
+  transform: rotate(50deg);
+  animation: moveFree 12s ease-in-out infinite;
+}
+
+@keyframes moveFree {
+  0% {
+    filter: drop-shadow(-4vmin 5vmin 1vmin rgb(48, 48, 48));
+    transform: scale(1) translate(0, 20vmin) rotateY(150deg);
+  }
+  50% {
+    transform: scale(0.5) translate(-1vmin, 25vmin) rotateY(150deg);
+    filter: drop-shadow(0vmin 5vmin 1vmin rgb(48, 48, 48));
+  }
+  100% {
+    filter: drop-shadow(-4vmin 5vmin 1vmin rgb(48, 48, 48));
+    transform: scale(1) translate(0, 20vmin) rotateY(150deg);
+  }
+}
+
+.leftSide {
+  transform: rotate(-50deg);
+}
+
+.op {
+  width: 50%;
+  height: 85%;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.seaAnimalTwo,
+.theBoat {
+  position: absolute;
+}
+
+.theBoat {
+  width: 40vmin;
+  bottom: 13vmin;
+  left: 30%;
+  filter: drop-shadow(1vmin -2vmin 1vmin black);
+  opacity: 0.7;
+}
+
+.home {
+  opacity: 0.7;
+  background-image: url("../assets/bg.jpg");
+  background-size: 100% 100%;
+}
+
+.home div {
+  width: 50%;
+  height: 20%;
+  background-color: #2a206898;
+}
+
+.home p {
+  font-size: 5vmin;
+}
+
+.someFix {
+  direction: ltr;
+}
+
+.table .titles {
+  direction: rtl;
+  justify-content: space-around;
+  padding: initial;
+  position: sticky;
+  top: 0;
+  background: linear-gradient(#7434991f, #400e59);
+}
+
+.someData {
+  width: 97%;
+  height: initial;
+  margin: auto;
+  justify-content: space-around;
+  flex-direction: column;
+  gap: 4vmin;
+  margin-bottom: 5vmin;
+}
+
+.someData div {
+  width: 100%;
+  height: 25vmin;
+  text-align: center;
+  padding: 2vmin;
+  display: flex;
+  box-shadow: inset 0 0 1vmin #5c47fb8c;
+  border-radius: 15px;
+}
+
+.someData div p:last-child {
+  border: initial;
+}
+
+.someData div p {
+  color: #ffffffba;
+  font-size: 2.5vmin;
+  width: 100%;
+  letter-spacing: 0.1vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.table .titles h4 {
+  width: 100%;
+  /* height: 100%; */
+  padding: 2vmin;
+  font-size: 2.5vmin;
+  text-align: center;
+  font-weight: bold;
+  background: linear-gradient(#ac00ff, #fff);
+  border-left: 3px solid rgba(166, 107, 195, 0.24);
+}
+
+.table .titles h4:last-child {
+  border-left: initial;
+}
+
+.theData {
+  text-align: center;
+  direction: rtl;
+  height: 15%;
+}
+
 .s {
   flex-direction: column;
   justify-content: space-evenly;
@@ -926,6 +1099,7 @@ body,
 
 .p {
   font-size: 4vmin;
+  text-align: center;
   background: linear-gradient(to top, #fff, #8331ab, #f500f5);
   background-clip: border-box;
   background-position: -20% -20%, 0 0, 20% 20%;
@@ -983,8 +1157,9 @@ body,
   width: 100%;
   letter-spacing: 0.1vw;
   text-shadow: 0 0 1vmin black;
-  font-size: 2.5vmin;
+  font-size: 3vmin;
   user-select: none;
+  font-weight: 800;
   border-top: 3px dashed rgba(255, 255, 255, 0.219);
 }
 
@@ -1206,6 +1381,10 @@ body,
   font-weight: bolder;
 }
 
+.paymentMethod p {
+  font-size: 3.5vmin;
+}
+
 .details .dadInputs {
   border-bottom: 3px dashed pink;
 }
@@ -1246,12 +1425,88 @@ body,
   flex-direction: column;
 }
 
+@media screen and (max-width: 1400px) {
+  .insideArea {
+    flex-direction: column-reverse;
+    display: flex;
+    min-height: 165vh;
+    gap: 10vmin;
+  }
+  .Content,
+  .full {
+    overflow-y: scroll;
+  }
+  .SideNavContainer {
+    width: 20% !important;
+  }
+  .op,
+  .moreInside {
+    width: 85%;
+  }
+  .moreInside {
+    overflow-y: scroll;
+  }
+  .allData {
+    height: initial !important;
+  }
+  .special {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+  .dates {
+    height: 100%;
+  }
+    
+  .agada .insideArea {
+    gap: initial;
+    flex-direction: column;
+    min-height: initial !important;
+  }
+
+  .input-container p:first-child {
+    font-size: 7vmin !important;
+  }
+  .oneArea p {
+    font-size: 3vmin;
+  }
+
+}
+
 /* PHONE */
 
 @media screen and (max-width: 900px) {
-  /* form {
-    width: 80% !important;
-  } */
+  #digitalNote {
+    flex-direction: column;
+  }
+  .carousel {
+    height: 60%;
+  }
+  .SideNavContainer {
+    height: 10%;
+  }
+  .circleStatus {
+    width: 2vw;
+  }
+  .sideNav ul {
+    display: flex;
+    flex-direction: row;
+  }
+  .Content {
+    height: 90% !important;
+  }
+  .sideNav ul li {
+    height: 100%;
+  }
+  .SideNavContainer,
+  .sideNav {
+    width: 100% !important;
+  }
+  .closer,
+  .center,
+  .calendar::before {
+    display: none;
+  }
   .input-label,
   .input-field {
     font-size: 3.5vmin;
@@ -1261,5 +1516,65 @@ body,
   }
   .doneButton:hover {
     font-size: 3.5vmin;
+  }
+  .title {
+    font-size: 4vmin !important;
+    line-height: 10vmin;
+  }
+  .choose h5 {
+    font-size: 4vmin;
+  }
+  .dates p {
+    font-size: 3vmin;
+  }
+
+  .op,
+  .moreInside,
+  .clientTicket,
+  .combine input {
+    width: 95%;
+  }
+
+  .buttons .doneButton {
+    width: 40% !important;
+  }
+
+  .desc {
+    font-size: 4.5vmin;
+  }
+
+  /* .seaAnimalTwo,
+  .theBoat {
+    display: none;
+  } */
+  .input-container {
+    margin-top: 8vmin;
+  }
+  .combine input {
+    height: 10vmin !important;
+  }
+  .s {
+    flex-direction: column !important;
+  }
+  .theBoat {
+    bottom: 20vmin;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .oneArea p {
+    font-size: 5vmin;
+  }
+  .carousel {
+    height: 100%;
+  }
+  .input-container {
+    margin-top: initial;
+  }
+  .input-container .combine {
+    height: 35%;
+  }
+  .seaAnimalTwo {
+    display: none;
   }
 }

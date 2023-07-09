@@ -5,49 +5,37 @@ const { google } = require("googleapis");
 require("dotenv").config();
 
 const postMission = async (req, res) => {
-  const { first, email, second, third, checkDetails, date } = req.body;
-
-  // const someValues = [
-  //   "להלהללה",
-  //   "קוסמטיקה רפואית - הסרת שיער בלייזר",
-  //   "טל': 050-123-1234 | אי מייל: akaa@.il",
-  //   `קבלה מספר 0001 /3`,
-  //   "הכדשכש 4214 הכגד 1234567",
-  //   `לכבוד ${first}`,
-  //   "",
-  //   "!תודה על בחירתכם בשירות שלנו",
-  //   ".אם יש לכם כל משוב או שאלה, אנא אל תהססו ליצור קשר עימי",
-  //   ",בברכה",
-  //   "להלהללה",
-  // ];
-
-  // const html = someValues.map((some, index) => {
-  //   if (index === 7 || index === 8 || index === 9) {
-  //     return `<table style="width: 100%; border-collapse: collapse; border: 1px solid black;">
-  //       <tr>
-  //         <td style="text-align: right; padding: 10px;">
-  //           <p style="font-size: 20px; font-weight: bold;"><strong>${some}</strong></p>
-  //         </td>
-  //       </tr>
-  //     </table>`;
-  //   } else {
-  //     return `<p style="font-size: 18px;">${some}</p>`;
-  //   }
-  // });
+  const { first, email, second, third, checkDetails, date, theIndex, mainIndex, total } = req.body;
 
   const html = `
-    <h1 style="font-weight: bold">טניה אבן חן ינושוק</h1>
-    <h3>קוסמטיקה רפואית - הסרת שיער בלייזר</h3>
-    <h4>הרימון 34 באר גנים 7928900 | טלפון: 054-745-9178</h4>
-    <h4>אי מייל: tec1@012.net.il | עוסק פטור מספר 317956951</h4>
-    <h3>קבלה מספר 0001 / 3</h3>
-    <h4>לכבוד ${first}</h4>
-      <div>
-        
-        <p>סך הכל: 250</p>
-
+    <h1 style="font-weight: bold; color: #292068">${process.env.NAME}</h1>
+    <h3 style="color: #292068">קוסמטיקה רפואית - הסרת שיער בלייזר</h3>
+    <h4 style="color: #292068">${process.env.DETAILSONE}</h4>
+    <h4 style="color: #292068">${process.env.DETAILSTWO}</h4>
+    <h3 style="color: #292068">קבלה מספר ${theIndex} / ${mainIndex}</h3>
+    <h3 style="color: #292068">לכבוד ${first}</h3>
+    <div>
+      <h3 style="text-decoration: underline; color: #6a2c8c">פרטי ההזמנה</h3>
+      <div style="color: #6a2c8c">
+      ${third.map((thi) => {
+        return `<h4>${thi[0] > 1 ? thi[0] : ""} ${thi[1]} ${thi[2]}</h4>`;
+      })}
       </div>
-      <h4>שולם ב-${second}</h4>
+    </div>
+    <h4 style="color: #6a2c8c">סה"כ ${total}</h4>
+    <h4 style="color: #6a2c8c">שולם ב-${second}</h4>
+    ${
+      second === "צ'ק"
+        ? `<p style="color: #6a2c8c"><strong>צק מספר:</strong> ${checkDetails[0]}</p>
+      </br>
+      <p style="color: #6a2c8c"><strong>בנק:</strong> ${checkDetails[1]}</p>
+      </br>
+      <p style="color: #6a2c8c"><strong>ז"פ:</strong> ${checkDetails[2]}</p>
+      </br>
+      <p style="color: #6a2c8c"><strong>סך:</strong> ${checkDetails[3]}</p>`
+        : ""
+    }
+    <h4 style="text-decoration: underline; color: #6a2c8c">תאריך ${date}</h4>
   `;
 
   try {
@@ -68,7 +56,10 @@ const postMission = async (req, res) => {
       email,
       second,
       third,
+      total,
       checkDetails,
+      theIndex,
+      mainIndex,
       date,
     });
     await newMission.save();

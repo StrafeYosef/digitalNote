@@ -13,6 +13,18 @@ const MissionsSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    theIndex: {
+        type: String,
+        required: true,
+    },
+    total: {
+        type: String,
+        required: true,
+    },
+    mainIndex: {
+        type: String,
+        required: true,
+    },
     checkDetails: {
         type: Array,
     },

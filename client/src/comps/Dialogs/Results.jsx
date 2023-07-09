@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { MyContext } from "../Context/Context";
 import { FaShekelSign } from "react-icons/fa";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Results() {
   const { resultsOpen, setResultsOpen } = useContext(MyContext);
@@ -22,6 +24,9 @@ function Results() {
 
   const [date, setDate] = useState("");
 
+  let { theIndex, setTheIndex } = useContext(MyContext);
+  let { mainIndex, setMainIndex } = useContext(MyContext);
+
   const theDate = new Date();
 
   useEffect(() => {
@@ -40,12 +45,15 @@ function Results() {
         });
       })
     );
-    setCheckDetails(checkInputs)
-    console.log(checkDetails)
+    setCheckDetails(checkInputs);
   }, [inputs, priceInputs, infoObject, checkInputs, clickedIndex]);
+
+  const {total} = useContext(MyContext);
 
   const sendMission = async () => {
     try {
+      setTheIndex((prev) => (prev === 9 ? 1 : prev + 1));
+      setMainIndex((prev) => (theIndex === 9 ? prev + 1 : prev));
       await axios.post("http://localhost:5174/missions/postMission", {
         first,
         email,
@@ -53,15 +61,49 @@ function Results() {
         checkDetails,
         third,
         date,
+        total: total + '₪',
+        theIndex,
+        mainIndex: mainIndex.toString().padStart(4, "0"),
       });
+
+      toast.success('Билет успешно добавлен', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
       for (let i = 0; i <= 1; i++) {
         inputs[i].value = "";
       }
+      localStorage.setItem("index", theIndex === 9 ? 1 : theIndex + 1);
+      localStorage.setItem(
+        "mainIndex",
+        theIndex === 9
+          ? (mainIndex + 1).toString().padStart(4, "0")
+          : mainIndex.toString().padStart(4, "0")
+      );
+      
+
       setResultsOpen(false);
       setSecond(infoObject[0].text);
       setClickedIndex(0);
       setPriceInputs([]);
+      setCheckInputs(["", "", "", ""]);
     } catch (error) {
+      toast.error('Не удалось добавить билет', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
       console.log(error);
     }
   };
@@ -76,10 +118,10 @@ function Results() {
       <div className="combine flex jcac some">
         <div className="combine flex jcac" style={{ height: "initial" }}>
           <div className="receiver combine half flex jcac">
-            <p className="title gradientText">{first || "No user provided"}</p>
+            <p className="title gradientText">{first || "Пользователь не указан."}</p>
           </div>
           <div className="email combine flex jcac">
-            <p className="title gradientText">{email || "No email provided"}</p>
+            <p className="title gradientText">{email || "Адрес электронной почты не предоставлен."}</p>
           </div>
           <div className="paymentMethod combine half flex jcac">
             <p className="title gradientText">

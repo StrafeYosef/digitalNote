@@ -10,7 +10,7 @@ function AddDetails() {
   const three = ["Количество", "Тип", "Цена"];
   const [theIndex, setTheIndex] = useState(1);
 
-  const [total, setTotal] = useState(0);
+  const {total, setTotal} = useContext(MyContext);
 
   const removeNeeded = (index) => {
     setPriceInputs((prevArray) => prevArray.filter((_, i) => i !== index));
@@ -18,9 +18,6 @@ function AddDetails() {
 
   const { priceInputs, setPriceInputs } = useContext(MyContext);
 
-  // useEffect(() => {
-  //   console.log(total);
-  // }, [total]);
 
   const addObjects = () => {
     const newObject = {};
@@ -73,9 +70,9 @@ function AddDetails() {
         </p>
         <button
           onClick={() => setShouldOpen(false)}
-          className="doneButton trans pointer"
+          className="save doneButton trans pointer"
         >
-          закрывать
+          Сохранить
         </button>
       </div>
       <div className="combine flex jcac titles color">

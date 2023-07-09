@@ -69,7 +69,7 @@ function Content() {
 
   return (
     <>
-      <div className={clicked ? "Content" : "Content full"}>
+      <div className={clicked ? "full" : chosenIndex === 2 ? "Content agada" : "Content"}>
         <TopNav />
         {chosenIndex === 1 ? (
           <div className="insideArea flex jcac">
@@ -94,7 +94,7 @@ function Content() {
                 </div>
                 <div
                   className="combine flex jcac"
-                  style={{ justifyContent: "space-around" }}
+                  style={{ justifyContent: "space-around"}}
                 >
                   <p className="title datesToday gradientText">
                     Данные{" "}
@@ -178,7 +178,10 @@ function Content() {
                 )}
               </div>
             </div>
-            <Calendar />
+            <div className="op flex jcac">
+              <p className="title gradientText">Нажмите любую дату, чтобы отобразить ее данные.</p>
+              <Calendar />
+            </div>
           </div>
         ) : chosenIndex === 2 ? (
           <Client />

@@ -32,7 +32,7 @@ export default function AddSelect() {
       <div className="optionsArea flex">
         <button
           onClick={() => setSelectOpen(false)}
-          className="doneButton trans pointer"
+          className="save doneButton trans pointer"
         >
           Сохранить
         </button>

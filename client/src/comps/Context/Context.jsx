@@ -107,24 +107,10 @@ export const MyContextProvider = ({ children }) => {
     },
   ]);
 
-  // const sendMission = async () => {
-  //   try {
-  //     await axios.post("http://localhost:5174/missions/postMission", {
-  //       first,
-  //       second,
-  //       check: checkDetails,
-  //       third,
-  //       date,
-  //     });
-  //     inputs[0].value = "";
-  //     setResultsOpen(false);
-  //     setSecond(infoObject[0].text);
-  //     setClickedIndex(0);
-  //     setPriceInputs([]);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const [total, setTotal] = useState(0);
+
+  const [theIndex, setTheIndex] = useState(1);
+  const [mainIndex, setMainIndex] = useState(1);
 
   const [infoObject, setInfoObject] = useState([
     {
@@ -132,19 +118,19 @@ export const MyContextProvider = ({ children }) => {
       icon: <AiOutlineQuestion />,
     },
     {
-      text: "бит",
+      text: "ביט",
       icon: <GiPaperPlane />,
     },
     {
-      text: "Наличные",
+      text: "מזומן",
       icon: <BsCashStack />,
     },
     {
-      text: "Kредитная Kарта",
+      text: "כרטיס אשראי",
       icon: <BsCreditCardFill />,
     },
     {
-      text: "Чек ",
+      text: "צ'ק",
       icon: <FaMoneyCheck />,
     },
   ]);
@@ -179,7 +165,12 @@ export const MyContextProvider = ({ children }) => {
   };
 
   const contextValues = {
-    // sendMission,
+    total,
+    setTotal,
+    theIndex,
+    setTheIndex,
+    mainIndex,
+    setMainIndex,
     email,
     setEmail,
     clicked,

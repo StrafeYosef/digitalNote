@@ -23,14 +23,22 @@ function Client() {
   const { handleInputs } = useContext(MyContext);
 
   useEffect(() => {
-    oneWidth.current.scrollTo({
-      left: -1 * (window.innerWidth * window.innerHeight),
-      behavior: "smooth",
-    });
-    setValueChange(0)
-    setNeededWidth(8)
-  }, [resultsOpen])
- 
+    const resetBack = () => {
+      oneWidth.current.scrollTo({
+        left: -1 * (window.innerWidth * window.innerHeight),
+        behavior: "smooth",
+      });
+      setValueChange(0);
+      setNeededWidth(8);
+    }
+    resetBack();
+    window.addEventListener("resize", resetBack);
+
+    return () => {
+      window.removeEventListener("resize", resetBack);
+    }
+  }, [resultsOpen]);
+
   const { startAll } = useContext(MyContext);
 
   const buttons = [<AiOutlineLeft />, <AiOutlineRight />];
@@ -63,7 +71,10 @@ function Client() {
       <p className="p textGradient">Добавить новый клиентский билет</p>
       <div className="clientTicket bg bShadow">
         <div className="mainInformation flex fullWidth">
-          <p className="desc absolute ticketNum">Номер билета 0001 /1</p>
+          <p className="desc absolute ticketNum">
+            Номер билета {localStorage.getItem("mainIndex")} /{" "}
+            {localStorage.getItem("index")}
+          </p>
           <div className="combine flex container">
             <div className="rail flex">
               {array.map((arr, index) => {
