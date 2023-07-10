@@ -10,9 +10,9 @@ app.use(cors());
 
 routesInit(app);
 
-const { PORT, DB } = process.env;
+const { SERVER, DB } = process.env;
 
-app.listen(PORT, () => {
+app.listen(SERVER, () => {
   console.log("Server - running.");
 });
 
