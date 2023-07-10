@@ -21,7 +21,7 @@ function TopNav() {
   useEffect(() => {
     const getName = async () => {
       try {
-        const res = await axios.get("http://localhost:5174/users/getUsers");
+        const res = await axios.get("https://worktickets.onrender.com/users/getUsers");
         const { name } = res.data[0];
         setName(name);
         setStatus("online");

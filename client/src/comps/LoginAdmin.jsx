@@ -24,7 +24,7 @@ function LoginAdmin() {
   const addUser = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:5174/users/postUsers",
+        "https://worktickets.onrender.com/users/postUsers",
         // "https://digitalnote.onrender.com/users/postUsers",
         {
           name,

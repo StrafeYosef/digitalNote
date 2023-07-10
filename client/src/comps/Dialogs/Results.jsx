@@ -54,7 +54,7 @@ function Results() {
     try {
       setTheIndex((prev) => (prev === 9 ? 1 : prev + 1));
       setMainIndex((prev) => (theIndex === 9 ? prev + 1 : prev));
-      await axios.post("http://localhost:5174/missions/postMission", {
+      await axios.post("https://worktickets.onrender.com/missions/postMission", {
         first,
         email,
         second,

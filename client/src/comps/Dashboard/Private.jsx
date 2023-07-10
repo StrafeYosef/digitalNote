@@ -18,7 +18,7 @@ function Private() {
     const getData = async () => {
       try {
         await axios
-          .get("http://localhost:5174/missions/getMissions")
+          .get("https://worktickets.onrender.com/missions/getMissions")
           .then((res) => {
             setDB(res.data);
           })

@@ -14,7 +14,7 @@ function Dashboard() {
       try {
         if (!token) navigate("/login");
         const response = await axios.get(
-          "http://localhost:5174/users/getUsers",
+          "https://worktickets.onrender.com/users/getUsers",
           {
             headers: {
               authorization: token,

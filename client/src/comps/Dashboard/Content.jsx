@@ -23,7 +23,7 @@ function Content() {
     const getDB = async () => {
       try {
         await axios
-          .get("http://localhost:5174/missions/getMissions")
+          .get("https://worktickets.onrender.com/missions/getMissions")
           .then((res) => {
             setDB((prev) => {
               return [...prev], res.data;
